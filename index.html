@@ -1,51 +1,706 @@
-<!DOCTYPE html>
-<!-- build: 2025-10-24-23-TEST -->
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teng Jin, Khoo | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>Teng Jin Khoo</h1>
-    <p>Engineering Systems & Design | Sustainability | Analytics</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hi! I'm Teng Jin, an ESD student at SUTD passionate about data, design, and sustainability.
-       I enjoy combining analytics and creativity to solve real-world problems.</p>
-  </section>
-
-  <section id="projects">
-    <h2>Featured Projects</h2>
-    <div class="project-card">
-      <h3>ESG Data Extraction Platform</h3>
-      <p>A Python + LLM powered tool for automating sustainability report analysis.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teng Jin Khoo | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Teng Jin Khoo - Engineering Systems & Design undergraduate focused on analytics, digital transformation, and sustainability."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon-tj.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-bg" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scroll-progress-bar"></span>
     </div>
-    <div class="project-card">
-      <h3>Personhood Voice Keepsake</h3>
-      <p>A digital card-based platform to help patients record meaningful stories and reflections.</p>
-    </div>
-  </section>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#top">Teng Jin Khoo</a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Toggle navigation"
+        >
+          Menu
+        </button>
+        <nav id="site-nav" class="site-nav">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#impact">Impact</a>
+          <a href="#work">Work</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#documents">Documents</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:tengjinkhoo02@gmail.com">tengjinkhoo02@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/khootengjin" target="_blank">khootengjin</a></p>
-  </section>
+    <main id="top">
+      <section class="hero container reveal">
+        <div class="hero-copy">
+          <p class="kicker">Fresh Graduate (May 2026)</p>
+          <h1>Welcome to Teng Jin's Portfolio</h1>
+          <p class="intro">
+            I build practical analytics systems that help teams make faster, better
+            decisions. Open to graduate roles from July 2026.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">View Featured Work</a>
+            <a
+              class="btn btn-secondary"
+              href="assets/resume/Teng_Jin_Khoo_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download Resume
+            </a>
+          </div>
+        </div>
+        <aside class="hero-panel hero-highlights" aria-label="Highlights">
+          <p class="eyebrow">Highlights</p>
+          <h2>At a Glance</h2>
+          <div class="highlight-grid">
+            <article class="highlight-tile">
+              <p class="highlight-number" data-target="30" data-prefix="" data-suffix="+">0</p>
+              <p class="highlight-label">Analytics projects delivered</p>
+            </article>
+            <article class="highlight-tile">
+              <p class="highlight-number" data-target="6" data-prefix="" data-suffix="">0</p>
+              <p class="highlight-label">ASEAN markets supported</p>
+            </article>
+            <article class="highlight-tile">
+              <p class="highlight-number" data-target="75" data-prefix="" data-suffix="%">0</p>
+              <p class="highlight-label">Forecasting back-test accuracy</p>
+            </article>
+            <article class="highlight-tile">
+              <p class="highlight-number" data-target="4" data-prefix="" data-suffix="">0</p>
+              <p class="highlight-label">Functional specs co-authored</p>
+            </article>
+          </div>
+        </aside>
+      </section>
 
-  <footer>
-    <p>© 2025 Teng Jin Khoo</p>
-  </footer>
+      <section id="about" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Profile</p>
+          <h2>About Me</h2>
+        </div>
+        <div class="about-layout">
+          <p>
+            I am an Engineering Systems & Design undergraduate at SUTD with internship
+            experience in people analytics, digital transformation consulting, and demand
+            forecasting.
+          </p>
+          <p class="small">
+            I enjoy bridging business and technical teams, structuring ambiguous problems,
+            and delivering analysis that can be acted on quickly.
+          </p>
+          <div class="about-focus">
+            <span class="chip">Data Analytics</span>
+            <span class="chip">Business Analysis</span>
+            <span class="chip">Dashboard Automation</span>
+            <span class="chip">Digital Transformation</span>
+            <span class="chip">Sustainability Analytics</span>
+          </div>
+        </div>
+      </section>
 
-  <script src="script.js"></script>
-</body>
+      <section id="experience" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Professional Experience</p>
+          <h2>Where I Built Impact</h2>
+        </div>
+        <div class="timeline">
+          <article class="experience-item">
+            <h3>TUV SUD - People Data Analytics Intern (ASEAN)</h3>
+            <p class="meta">Singapore | May 2025 - Dec 2025</p>
+            <ul>
+              <li>
+                Partnered with People Business Partners across six ASEAN markets (SG, MY,
+                ID, TH, VN, PH) to diagnose workforce issues.
+              </li>
+              <li>
+                Automated HR reporting in Power BI and reduced manual reporting from hours
+                to minutes for division heads.
+              </li>
+              <li>
+                Delivered 30+ analytics projects and synthesized survey insights into
+                regional retention recommendations.
+              </li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <h3>AvePoint - Business Analyst Intern (Digital Transformation)</h3>
+            <p class="meta">Singapore | Aug 2024 - Jan 2025</p>
+            <ul>
+              <li>
+                Worked with senior stakeholders on a S$6M+ regulatory transformation
+                program covering five modules.
+              </li>
+              <li>
+                Led archival module design and defined compliance logic adopted in final
+                deployment.
+              </li>
+              <li>
+                Co-authored four functional specifications and translated requirements into
+                Figma prototypes for stakeholder validation.
+              </li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <h3>Schlumberger (SLB) - Contract Data & Business Analyst</h3>
+            <p class="meta">Singapore | Jan 2024 - Apr 2024</p>
+            <ul>
+              <li>
+                Built SQL/Python pipelines and Power BI dashboards for regional demand
+                planning.
+              </li>
+              <li>
+                Evaluated three forecasting models and achieved 75% back-testing accuracy.
+              </li>
+              <li>
+                Created manager-friendly reporting visuals to improve visibility and
+                decision speed.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="impact" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Impact Snapshot</p>
+          <h2>Impact in Practice</h2>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <p class="metric-number" data-target="30" data-prefix="" data-suffix="+">0</p>
+            <p class="metric-label">Analytics projects in HR & Finance delivered in my latest internship with TÜV SÜD</p>
+          </article>
+          <article class="metric-card">
+            <p class="metric-number" data-target="4" data-prefix="" data-suffix="">0</p>
+            <p class="metric-label">Functional specification documents co-authored for an IT consulting project</p>
+          </article>
+          <article class="metric-card">
+            <p class="metric-number" data-target="10" data-prefix="" data-suffix="+">0</p>
+            <p class="metric-label">Senior stakeholders engaged in requirement gathering and solutions workshops</p>
+          </article>
+          <article class="metric-card">
+            <p class="metric-number" data-target="75" data-prefix="" data-suffix="%">0</p>
+            <p class="metric-label">Forecasting back-test accuracy for a demand forecasting industrial project</p>
+          </article>
+        </div>
+        <div class="impact-list">
+          <div class="impact-row">
+            <p class="impact-key">Automation</p>
+            <p class="impact-value">Recurring reporting moved from manual effort to dashboard automation.</p>
+          </div>
+          <div class="impact-row">
+            <p class="impact-key">Communication</p>
+            <p class="impact-value">Requirements translated clearly between business and technical stakeholders.</p>
+          </div>
+          <div class="impact-row">
+            <p class="impact-key">Decision Support</p>
+            <p class="impact-value">Forecast and workforce insights used to support planning and resource discussions.</p>
+          </div>
+          <div class="impact-row">
+            <p class="impact-key">Execution</p>
+            <p class="impact-value">Delivered cross-functional work under consulting and enterprise team settings.</p>
+          </div>
+        </div>
+        <p class="impact-note">And counting - I am actively building deeper project outcomes in each new role.</p>
+      </section>
+
+      <section id="work" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Featured Work</p>
+          <h2>Projects & Work Samples</h2>
+        </div>
+        <div class="project-grid">
+          <article
+            class="project"
+            data-project="esg-platform"
+            tabindex="0"
+            aria-label="Open project details for Sustainability Intelligence Platform"
+          >
+            <div class="project-visual visual-1 has-image">
+              <img
+                src="assets/projects/esg-platform/esg_hero_dashboard_focus.png"
+                alt="Sustainability dashboard interface with company-level ESG benchmarking views"
+                loading="lazy"
+              />
+            </div>
+            <h3>Sustainability Intelligence Platform (Capstone)</h3>
+            <p class="meta">SUTD x ESGpedia | In progress</p>
+            <div class="project-kpis" aria-label="Sustainability platform key figures">
+              <span>BA + prompt engineering</span>
+              <span>237-company validation</span>
+              <span>~2h to ~3m/company</span>
+            </div>
+            <p>
+              Bridged industry-client requirements with technical delivery, with primary
+              focus on prompt engineering to improve extraction reliability, plus data
+              cleaning, analysis, and validation support.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+          <article
+            class="project"
+            data-project="asean-automation"
+            tabindex="0"
+            aria-label="Open project details for ASEAN Workforce Analytics Automation"
+          >
+            <div class="project-visual visual-2" aria-hidden="true"></div>
+            <h3>ASEAN Workforce Analytics Automation</h3>
+            <p class="meta">TUV SUD</p>
+            <p>
+              Redesigned multi-country HR reporting using Power BI and DAX to provide
+              faster, more reliable attrition and recruitment insights for leadership.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+          <article
+            class="project"
+            data-project="slb-forecasting"
+            tabindex="0"
+            aria-label="Open project details for SLB Demand Forecasting and Planning"
+          >
+            <div class="project-visual visual-3 has-image">
+              <img
+                src="assets/projects/slb/slb_visual_models_final.png"
+                alt="SLB model comparison matrix for forecasting technique selection"
+                loading="lazy"
+              />
+            </div>
+            <h3>SLB Demand Forecasting & Planning</h3>
+            <p class="meta">SLB | Jan 2024 - Apr 2024</p>
+            <div class="project-kpis" aria-label="SLB project key figures">
+              <span>19,536 products</span>
+              <span>83 families</span>
+              <span>3 models tested</span>
+            </div>
+            <p>
+              Led a 4-month forecasting project to help SLB move from estimation-based
+              planning to data-driven demand prediction for finished goods and components.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+          <article
+            class="project"
+            data-project="who-am-i-keepsake"
+            tabindex="0"
+            aria-label="Open project details for Who Am I physical card game project"
+          >
+            <div class="project-visual visual-6 has-image">
+              <img
+                src="assets/projects/keepsake/WhoAmICardGame.png"
+                alt="Fanned Who Am I cards showing the core deck concept"
+                loading="lazy"
+              />
+            </div>
+            <h3>Who Am I Physical Card Game</h3>
+            <p class="meta">SUTD | Sep 2025 - Dec 2025</p>
+            <div class="project-kpis" aria-label="Who Am I project key figures">
+              <span>4 months</span>
+              <span>30 playable cards + 1 guide</span>
+              <span>4 reflection themes</span>
+            </div>
+            <p>
+              Built a physical conversation card game for palliative-care settings to make
+              meaningful conversations easier to start, with digital keepsake features as a
+              supporting extension.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+          <article
+            class="project"
+            data-project="evac-sim"
+            tabindex="0"
+            aria-label="Open project details for Mall Evacuation Simulation Optimization"
+          >
+            <div class="project-visual visual-5 has-image">
+              <img
+                src="assets/projects/evac-sim/evac-hero.png"
+                alt="Simio dashboard and control panel for evacuation simulation"
+                loading="lazy"
+              />
+            </div>
+            <h3>Mall Evacuation Simulation Optimization</h3>
+            <p class="meta">SUTD | Jan 2025 - Apr 2025</p>
+            <div class="project-kpis" aria-label="Evacuation simulation key figures">
+              <span>4 months</span>
+              <span>100 replications/scenario</span>
+              <span>209s to 92.67s</span>
+            </div>
+            <p>
+              Built and iterated the Simio model to optimize mall exit routing and door
+              capacity strategy through multi-scenario testing and output analysis.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+          <article
+            class="project"
+            data-project="rainy-retreat"
+            tabindex="0"
+            aria-label="Open project details for Rainy Retreat Interactive Light Installation"
+          >
+            <div class="project-visual visual-4 has-image">
+              <img
+                src="assets/projects/rainy-retreat/rainy-hero.png"
+                alt="Rainy Retreat prototype with interactive cloud lights and umbrellas"
+                loading="lazy"
+              />
+            </div>
+            <h3>Rainy Retreat Interactive Light Installation</h3>
+            <p class="meta">SUTD | Jan 2023 - Apr 2023</p>
+            <div class="project-kpis" aria-label="Rainy Retreat project key figures">
+              <span>4 months</span>
+              <span>Main Arduino coder</span>
+              <span>2 Arduino boards</span>
+            </div>
+            <p>
+              Built a rain-themed interactive installation where cloud pressure tiles trigger
+              dynamic umbrella lighting, with control logic and physics-based energy
+              validation led end to end.
+            </p>
+            <button class="btn btn-secondary project-trigger" type="button">
+              View Project Details
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Core Skills</p>
+          <h2>Toolbox & Working Style</h2>
+        </div>
+        <div class="toolbox-layout">
+          <article class="toolbox-column">
+            <h3>Technical Stack</h3>
+            <div class="chip-group">
+              <span class="chip">SQL (Advanced)</span>
+              <span class="chip">Python (Pandas, NumPy, Matplotlib)</span>
+              <span class="chip">Power BI (DAX)</span>
+              <span class="chip">Excel (Power Query, Pivot, VLOOKUP)</span>
+              <span class="chip">VBA</span>
+              <span class="chip">Statistics</span>
+              <span class="chip">Machine Learning</span>
+            </div>
+          </article>
+          <article class="toolbox-column">
+            <h3>How I Work</h3>
+            <ol class="workflow-list">
+              <li>Frame business question and align metrics with stakeholders.</li>
+              <li>Build reliable data flow and validate assumptions early.</li>
+              <li>Design clear visuals for business and technical audiences.</li>
+              <li>Translate insights into actionable recommendations.</li>
+            </ol>
+          </article>
+          <article class="toolbox-column toolbox-column-wide">
+            <h3>Where I Apply These</h3>
+            <div class="toolbox-matrix">
+              <div class="toolbox-row">
+                <p>People Analytics</p>
+                <p>Power BI, SQL, stakeholder reporting</p>
+              </div>
+              <div class="toolbox-row">
+                <p>Digital Transformation</p>
+                <p>Requirements analysis, Figma prototypes, workflow design</p>
+              </div>
+              <div class="toolbox-row">
+                <p>Demand Forecasting</p>
+                <p>Python modelling, back-testing, dashboard communication</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="education" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Education</p>
+          <h2>Academic Foundation</h2>
+        </div>
+        <div class="education-layout compact-education">
+          <article class="education-main">
+            <p class="meta">Singapore University of Technology and Design (SUTD)</p>
+            <h3>B.Eng in Engineering Systems & Design</h3>
+            <p class="small">Minor in Sustainability by Design | Sep 2022 - Present</p>
+            <div class="academic-highlights">
+              <p class="academic-pill">ASEAN Full Scholarship Recipient</p>
+              <p class="academic-pill">Vice President, SUTD Badminton Club (2022-2023)</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="additional" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Additional Information</p>
+          <h2>Certifications, Languages, Interests</h2>
+        </div>
+        <div class="additional-grid">
+          <article class="credential-tile">
+            <h3>Certificates</h3>
+            <ul class="simple-list">
+              <li>CS50's Intro to Databases with SQL (Harvard Online, 2025)</li>
+              <li>Data Analyst in Power BI (DataCamp, in progress)</li>
+            </ul>
+          </article>
+          <article class="credential-tile">
+            <h3>Languages</h3>
+            <ul class="simple-list">
+              <li>English (Native)</li>
+              <li>Chinese Mandarin (Business)</li>
+              <li>Malay (Conversational)</li>
+            </ul>
+          </article>
+          <article class="credential-tile">
+            <h3>Interests</h3>
+            <ul class="simple-list">
+              <li>Competitive sports</li>
+              <li>Equity and REIT markets</li>
+              <li>ESG and sustainability analytics</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="documents" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Documents</p>
+          <h2>Document Previews</h2>
+        </div>
+        <article class="document-shell">
+          <div class="document-header">
+            <div>
+              <h3>Professional Recommendation</h3>
+              <p>
+                This letter offers third-party validation of my work ethic, communication,
+                and delivery quality.
+              </p>
+            </div>
+            <div class="document-actions">
+              <a
+                class="btn btn-primary"
+                href="assets/recommendation/Khoo_Teng_Jin_Recommendation_Letter.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open PDF
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="assets/recommendation/Khoo_Teng_Jin_Recommendation_Letter.pdf"
+                download
+              >
+                Download
+              </a>
+            </div>
+          </div>
+          <div class="document-preview">
+            <iframe
+              src="assets/recommendation/Khoo_Teng_Jin_Recommendation_Letter.pdf#view=FitH"
+              title="Recommendation letter preview"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </article>
+        <article class="document-shell">
+          <div class="document-header">
+            <div>
+              <h3>Resume</h3>
+              <p>
+                A quick preview of my latest resume.
+              </p>
+            </div>
+            <div class="document-actions">
+              <a
+                class="btn btn-primary"
+                href="assets/resume/Teng_Jin_Khoo_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open PDF
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="assets/resume/Teng_Jin_Khoo_Resume.pdf"
+                download
+              >
+                Download
+              </a>
+            </div>
+          </div>
+          <div class="document-preview">
+            <iframe
+              src="assets/resume/Teng_Jin_Khoo_Resume.pdf#view=FitH"
+              title="Resume preview"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </article>
+      </section>
+
+      <section id="contact" class="section container reveal">
+        <div class="section-head">
+          <p class="eyebrow">Contact</p>
+          <h2>Let's Connect</h2>
+        </div>
+        <div class="contact-panel">
+          <p>
+            I am open to graduate roles in data analytics, business analytics, and systems
+            transformation.
+          </p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:tengjinkhoo02@gmail.com">Email Me</a>
+            <a class="btn btn-secondary" href="tel:+6588104919">Call / WhatsApp</a>
+            <a
+              class="btn btn-secondary"
+              href="https://www.linkedin.com/in/khootengjin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+          <div class="contact-details" aria-label="Direct contact details">
+            <p class="contact-detail-row">
+              <span class="contact-label">Email</span>
+              <span class="contact-value-wrap">
+                <span class="contact-value">tengjinkhoo02@gmail.com</span>
+                <button
+                  class="btn btn-secondary copy-inline-btn"
+                  type="button"
+                  data-copy-text="tengjinkhoo02@gmail.com"
+                  data-copy-label="Email"
+                  aria-label="Copy email"
+                  title="Copy email"
+                >
+                  <span class="sr-only">Copy email</span>
+                </button>
+              </span>
+            </p>
+            <p class="contact-detail-row">
+              <span class="contact-label">Phone</span>
+              <span class="contact-value-wrap">
+                <span class="contact-value">+65 8810 4919</span>
+                <button
+                  class="btn btn-secondary copy-inline-btn"
+                  type="button"
+                  data-copy-text="+6588104919"
+                  data-copy-label="Phone"
+                  aria-label="Copy phone number"
+                  title="Copy phone number"
+                >
+                  <span class="sr-only">Copy phone number</span>
+                </button>
+              </span>
+            </p>
+            <p class="contact-detail-row">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value-wrap">
+                <span class="contact-value">linkedin.com/in/khootengjin</span>
+                <button
+                  class="btn btn-secondary copy-inline-btn"
+                  type="button"
+                  data-copy-text="https://www.linkedin.com/in/khootengjin"
+                  data-copy-label="LinkedIn URL"
+                  aria-label="Copy LinkedIn URL"
+                  title="Copy LinkedIn URL"
+                >
+                  <span class="sr-only">Copy LinkedIn URL</span>
+                </button>
+              </span>
+            </p>
+          </div>
+          <p id="copy-status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <dialog id="project-dialog" class="project-dialog">
+        <div class="dialog-header">
+          <p class="eyebrow" id="dialog-context">Project Details</p>
+          <button class="dialog-close" type="button" aria-label="Close project details">
+            Close
+          </button>
+        </div>
+        <h3 id="dialog-title">Project Overview</h3>
+        <p class="meta" id="dialog-summary"></p>
+        <div class="dialog-stats" id="dialog-stats" hidden></div>
+        <ul class="dialog-list" id="dialog-list" hidden></ul>
+        <div class="dialog-gallery" id="dialog-gallery" hidden></div>
+        <div class="dialog-grid">
+          <article class="dialog-block">
+            <h4>Challenge</h4>
+            <p id="dialog-challenge"></p>
+          </article>
+          <article class="dialog-block">
+            <h4>What I Did</h4>
+            <p id="dialog-action"></p>
+          </article>
+          <article class="dialog-block">
+            <h4>Impact</h4>
+            <p id="dialog-impact"></p>
+          </article>
+          <article class="dialog-block">
+            <h4>Tools</h4>
+            <p id="dialog-tools"></p>
+          </article>
+        </div>
+      </dialog>
+
+      <dialog
+        id="snippet-lightbox"
+        class="snippet-lightbox"
+        aria-label="Expanded project snippet"
+      >
+        <div class="snippet-lightbox-panel" role="dialog" aria-modal="true">
+          <button
+            class="snippet-lightbox-close"
+            id="snippet-lightbox-close"
+            type="button"
+            aria-label="Close expanded image"
+          >
+            Close
+          </button>
+          <img id="snippet-lightbox-image" src="" alt="" loading="lazy" />
+          <p id="snippet-lightbox-caption" class="snippet-lightbox-caption"></p>
+        </div>
+      </dialog>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>(c) <span id="year"></span> Teng Jin Khoo. Built with HTML, CSS, and JavaScript.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
