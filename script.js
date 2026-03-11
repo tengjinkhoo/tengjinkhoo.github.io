@@ -173,7 +173,7 @@ const projectDetails = {
       },
       {
         type: "video",
-        src: "assets/projects/evac-sim/mall-evac-demo.mp4",
+        src: "assets/projects/evac-sim/mall-evac-demo-web.mp4",
         poster: "assets/projects/evac-sim/evac-hero.png",
         alt: "Demonstration of the evacuation simulation model",
         title: "Simulation Demo Video",
