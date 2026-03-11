@@ -1,1 +1,1 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/projects/evac-sim/mall-evac-demo-source.mp4 filter=lfs diff=lfs merge=lfs -text
