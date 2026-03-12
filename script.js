@@ -74,26 +74,47 @@ const projectDetails = {
     ],
   },
   "asean-automation": {
-    context: "TUV SUD",
+    context: "TUV SUD | People Data Analytics Intern (ASEAN)",
     title: "ASEAN Workforce Analytics Automation",
-    summary: "Regional HR reporting automation across six ASEAN markets.",
+    summary:
+      "Regional people-analytics transformation across six ASEAN markets, covering KPI alignment, workflow redesign, and leadership reporting automation.",
     challenge:
-      "Manual reporting workflows delayed insights and created inconsistencies between country teams.",
+      "Country teams were reporting through fragmented slide-based workflows, creating version-control issues, slower monthly cycles, and inconsistent KPI definitions across markets.",
     action:
-      "Redesigned workflows and automated recurring reporting logic in Power BI, including shared KPI definitions.",
+      "Worked with regional and country stakeholders to standardize metric definitions, improve source-data structure, and redesign recurring reporting into a one-page Power BI operating view. In parallel, delivered ad-hoc analyses on attrition, recruitment, and workforce movement to support ongoing People Partner discussions.",
     impact:
-      "Cut reporting turnaround from hours to minutes and improved leadership visibility on attrition and hiring trends.",
-    tools: "Power BI, DAX, Excel, Stakeholder Workshops",
+      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and gave leadership a faster way to spot trend shifts without scanning multiple slide decks.",
+    tools: "Power BI, DAX, Excel, Data Structuring, Stakeholder Alignment",
     stats: [
       { label: "Scope", value: "6 ASEAN markets" },
-      { label: "Role", value: "Analytics intern" },
-      { label: "Output", value: "Automated reporting" },
+      { label: "Role", value: "People analytics intern" },
+      { label: "Output", value: "One-page summary dashboard + ad-hoc analyses" },
       { label: "Benefit", value: "Hours to minutes" },
     ],
     highlights: [
-      "Aligned country teams on common KPI definitions to improve reporting consistency.",
-      "Automated recurring dashboard updates to reduce manual effort for regional teams.",
-      "Improved visibility of attrition and hiring trends for leadership planning.",
+      "Aligned teams on shared KPI and calculation logic so country comparisons were more reliable.",
+      "Consolidated multi-slide reporting into a compact one-page summary for faster leadership review.",
+      "Built and maintained refreshable reporting flows tied to HR operations update cycles.",
+      "Supported recurring and ad-hoc workforce analyses beyond attrition, including joiner/leaver movement patterns.",
+      "Translated data outputs into practical discussion points for regional People Business Partners.",
+    ],
+    snippets: [
+      {
+        src: "assets/projects/tuv-sud/tuv-attrition-onepager-public-synthetic-final.png",
+        alt: "Public-safe one-page ASEAN attrition dashboard with countries, divisions, age groups, and key insights",
+        title: "One-Page Leadership Summary (Public-safe sample)",
+        insight:
+          "Illustrates the reporting design shift from multiple disconnected slides into one compact decision-support page. Displayed values are synthetic and non-confidential.",
+        layout: "wide",
+      },
+      {
+        src: "assets/projects/tuv-sud/tuv-attrition-summary-public-synthetic.png",
+        alt: "Public-safe ASEAN attrition summary with yearly trends and category split",
+        title: "Trend + Category View (Public-safe sample)",
+        insight:
+          "Shows the standardized trend view and category breakdown used to support country and division-level conversations. Displayed values are synthetic and non-confidential.",
+        layout: "wide",
+      },
     ],
   },
   "evac-sim": {
@@ -104,13 +125,13 @@ const projectDetails = {
     challenge:
       "Identify evacuation configurations that reduce exit time while preserving reliability and practical resilience during mall emergencies.",
     action:
-      "Owned and modelled the Simio simulation workflow end to end: implemented model changes, ran repeated scenario tests, tuned system parameters, and compared output statistics across door-capacity combinations and exit-routing setups.",
+      "Took a hands-on role in the Simio workflow: implemented model changes, ran repeated scenario tests, tuned system parameters, and compared output statistics across door-capacity combinations and exit-routing setups.",
     impact:
       "Established a data-backed configuration strategy: baseline 1-door/1-capacity averaged 209.00s, while the best 2-door/2-capacity setup reached 92.67s (about 56% faster) with acceptable confidence intervals.",
     tools: "Simio, Experimental Design, Statistical Analysis, Scenario Testing",
     stats: [
       { label: "Duration", value: "4 months" },
-      { label: "Role", value: "Main Simio model owner" },
+      { label: "Role", value: "Simio model owner" },
       { label: "Replication design", value: "100 runs per scenario" },
       { label: "Best tested setup", value: "2 doors, capacity 2 each" },
     ],
