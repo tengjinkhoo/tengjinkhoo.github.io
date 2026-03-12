@@ -104,7 +104,7 @@ const projectDetails = {
     challenge:
       "Identify evacuation configurations that reduce exit time while preserving reliability and practical resilience during mall emergencies.",
     action:
-      "Owned the Simio simulation workflow end to end: implemented model changes, ran repeated scenario tests, tuned system parameters, and compared output statistics across door-capacity combinations and exit-routing setups.",
+      "Owned and modelled the Simio simulation workflow end to end: implemented model changes, ran repeated scenario tests, tuned system parameters, and compared output statistics across door-capacity combinations and exit-routing setups.",
     impact:
       "Established a data-backed configuration strategy: baseline 1-door/1-capacity averaged 209.00s, while the best 2-door/2-capacity setup reached 92.67s (about 56% faster) with acceptable confidence intervals.",
     tools: "Simio, Experimental Design, Statistical Analysis, Scenario Testing",
