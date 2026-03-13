@@ -71,24 +71,49 @@
           </div>
         </div>
         <aside class="hero-panel hero-highlights" aria-label="Highlights">
-          <p class="eyebrow">Selected Outcomes</p>
-          <h2>Proof at a Glance</h2>
+          <p class="eyebrow">Highlights</p>
+          <h2>At a Glance</h2>
+          <p class="hero-panel-note">Click a tile to jump to the related project or role.</p>
           <div class="highlight-grid">
-            <article class="highlight-tile">
+            <article
+              class="highlight-tile metric-jump"
+              data-project-link="asean-automation"
+              role="link"
+              tabindex="0"
+              aria-label="Jump to ASEAN Workforce Analytics Automation project"
+            >
+              <p class="highlight-number" data-target="3" data-prefix="" data-suffix=" of 5">3 of 5</p>
+              <p class="highlight-label">HR business partners adopted my dashboard</p>
+            </article>
+            <article
+              class="highlight-tile metric-jump"
+              data-project-link="asean-automation"
+              role="link"
+              tabindex="0"
+              aria-label="Jump to ASEAN Workforce Analytics Automation project"
+            >
               <p class="highlight-number" data-target="30" data-prefix="" data-suffix="+">30+</p>
-              <p class="highlight-label">Ad hoc analytics engagements delivered</p>
+              <p class="highlight-label">Analytics requests delivered</p>
             </article>
-            <article class="highlight-tile">
-              <p class="highlight-number" data-target="40" data-prefix="" data-suffix="x">40x</p>
-              <p class="highlight-label">Faster ESG extraction turnaround</p>
+            <article
+              class="highlight-tile metric-jump"
+              data-jump-target="#experience-avepoint"
+              role="link"
+              tabindex="0"
+              aria-label="Jump to AvePoint role details"
+            >
+              <p class="highlight-number" data-target="4" data-prefix="" data-suffix="">4</p>
+              <p class="highlight-label">Functional specs written</p>
             </article>
-            <article class="highlight-tile">
-              <p class="highlight-number" data-target="75" data-prefix="" data-suffix="%">75%</p>
-              <p class="highlight-label">Forecasting back-test accuracy</p>
-            </article>
-            <article class="highlight-tile">
+            <article
+              class="highlight-tile metric-jump"
+              data-jump-target="#experience-avepoint"
+              role="link"
+              tabindex="0"
+              aria-label="Jump to AvePoint role details"
+            >
               <p class="highlight-number" data-target="16" data-prefix="" data-suffix="+">16+</p>
-              <p class="highlight-label">Stakeholder workshops conducted</p>
+              <p class="highlight-label">Workshops conducted</p>
             </article>
           </div>
         </aside>
@@ -99,8 +124,72 @@
           <p class="eyebrow">Selected Work</p>
           <h2>Projects with Clear Business Outcomes</h2>
         </div>
+        <article class="featured-project-panel">
+          <div class="featured-project-media">
+            <img
+              src="assets/projects/tuv-sud/tuv-attrition-onepager-public-synthetic-final.png"
+              alt="Featured case study preview for ASEAN Workforce Analytics Automation"
+              loading="lazy"
+            />
+          </div>
+          <div class="featured-project-copy">
+            <p class="eyebrow">Featured Case Study</p>
+            <h3>ASEAN Workforce Analytics Automation</h3>
+            <p class="featured-project-summary">
+              One of the clearest examples of my work style: turning fragmented regional
+              reporting into one operating view that leaders could actually use each month.
+            </p>
+            <div
+              class="scope-visual"
+              role="img"
+              aria-label="Scope visual showing 6 countries, 5 divisions, and adoption by 3 of 5 HR business partners"
+            >
+              <article class="scope-card">
+                <p class="scope-value">6</p>
+                <p class="scope-label">Countries</p>
+                <div class="scope-chip-row" aria-hidden="true">
+                  <span>SG</span>
+                  <span>MY</span>
+                  <span>ID</span>
+                  <span>TH</span>
+                  <span>VN</span>
+                  <span>PH</span>
+                </div>
+                <p class="scope-note">One dashboard spanning six ASEAN markets</p>
+              </article>
+              <article class="scope-card">
+                <p class="scope-value">5</p>
+                <p class="scope-label">Divisions</p>
+                <div class="scope-division-grid" aria-hidden="true">
+                  <span>01</span>
+                  <span>02</span>
+                  <span>03</span>
+                  <span>04</span>
+                  <span>05</span>
+                </div>
+                <p class="scope-note">Standardized into one shared monthly reporting structure</p>
+              </article>
+              <article class="scope-card">
+                <p class="scope-value">3/5</p>
+                <p class="scope-label">HR BP adoption</p>
+                <p class="scope-note">3 of 5 HR business partners used it in monthly reviews</p>
+              </article>
+            </div>
+            <div class="featured-project-actions">
+              <button
+                class="btn btn-primary featured-project-trigger"
+                type="button"
+                data-project-open="asean-automation"
+              >
+                Open Featured Case Study
+              </button>
+              <a class="btn btn-secondary" href="#project-asean-automation">See Project Card</a>
+            </div>
+          </div>
+        </article>
         <div class="project-grid">
           <article
+            id="project-esg-platform"
             class="project"
             data-project="esg-platform"
             tabindex="0"
@@ -130,6 +219,7 @@
             </button>
           </article>
           <article
+            id="project-asean-automation"
             class="project"
             data-project="asean-automation"
             tabindex="0"
@@ -159,6 +249,7 @@
             </button>
           </article>
           <article
+            id="project-slb-forecasting"
             class="project"
             data-project="slb-forecasting"
             tabindex="0"
@@ -188,6 +279,7 @@
             </button>
           </article>
           <article
+            id="project-who-am-i-keepsake"
             class="project"
             data-project="who-am-i-keepsake"
             tabindex="0"
@@ -217,6 +309,7 @@
             </button>
           </article>
           <article
+            id="project-evac-sim"
             class="project"
             data-project="evac-sim"
             tabindex="0"
@@ -245,6 +338,7 @@
             </button>
           </article>
           <article
+            id="project-rainy-retreat"
             class="project"
             data-project="rainy-retreat"
             tabindex="0"
@@ -282,7 +376,7 @@
           <h2>Recent Roles</h2>
         </div>
         <div class="timeline">
-          <article class="experience-item">
+          <article id="experience-tuv" class="experience-item" tabindex="-1">
             <h3>TUV SUD - People Data Analytics Intern (ASEAN)</h3>
             <p class="meta">Singapore | May 2025 - Dec 2025</p>
             <ul>
@@ -303,13 +397,22 @@
               </li>
               <li>
                 Completed 30+ ad hoc analytics engagements across HR and Finance,
-                including People Voice Survey synthesis, cost simulations, compensation
-                analysis, and insurance-related reporting.
+                including
+                <span
+                  class="term-tooltip"
+                  tabindex="0"
+                  data-tooltip="An employee-feedback survey used to surface sentiment, engagement, and retention issues across the region."
+                  aria-label="People Voice Survey means an employee-feedback survey used to surface sentiment, engagement, and retention issues across the region."
+                >
+                  People Voice Survey
+                </span>
+                synthesis, cost simulations, compensation analysis, and insurance-related
+                reporting.
               </li>
             </ul>
           </article>
 
-          <article class="experience-item">
+          <article id="experience-avepoint" class="experience-item" tabindex="-1">
             <h3>AvePoint - Business Analyst Intern (Digital Transformation)</h3>
             <p class="meta">Singapore | Aug 2024 - Jan 2025</p>
             <ul>
@@ -324,7 +427,25 @@
                 GovTech.
               </li>
               <li>
-                Co-authored four functional specifications, supported UAT planning, and
+                Co-authored four
+                <span
+                  class="term-tooltip"
+                  tabindex="0"
+                  data-tooltip="Detailed requirement documents that define expected workflows, rules, and system behavior for development and QA."
+                  aria-label="Functional specifications means detailed requirement documents that define expected workflows, rules, and system behavior for development and QA."
+                >
+                  functional specifications
+                </span>
+                , supported
+                <span
+                  class="term-tooltip"
+                  tabindex="0"
+                  data-tooltip="User acceptance testing planning to confirm the delivered workflow works for the business before release."
+                  aria-label="UAT planning means user acceptance testing planning to confirm the delivered workflow works for the business before release."
+                >
+                  UAT planning
+                </span>
+                , and
                 translated business requirements into workflows, business rules, and edge
                 cases for development and QA teams.
               </li>
@@ -336,7 +457,7 @@
             </ul>
           </article>
 
-          <article class="experience-item">
+          <article id="experience-slb" class="experience-item" tabindex="-1">
             <h3>Schlumberger (SLB) - Contract Data & Business Analyst</h3>
             <p class="meta">Singapore | Jan 2024 - Apr 2024</p>
             <ul>
@@ -345,7 +466,16 @@
                 to support regional demand planning.
               </li>
               <li>
-                Evaluated three forecasting models and achieved 75% back-testing accuracy.
+                Evaluated three forecasting models and achieved 75%
+                <span
+                  class="term-tooltip"
+                  tabindex="0"
+                  data-tooltip="Accuracy measured by testing forecast performance on historical data before using the model for forward planning."
+                  aria-label="Back-testing accuracy means accuracy measured by testing forecast performance on historical data before using the model for forward planning."
+                >
+                  back-testing accuracy
+                </span>
+                .
               </li>
               <li>
                 Presented manager-friendly reporting visuals and dashboards to improve
@@ -358,25 +488,49 @@
 
       <section id="impact" class="section container reveal">
         <div class="section-head">
-          <p class="eyebrow">Key Outcomes</p>
-          <h2>What Changed</h2>
+          <p class="eyebrow">Results</p>
+          <h2>Outcomes</h2>
         </div>
         <div class="metrics-grid">
-          <article class="metric-card">
-            <p class="metric-number" data-target="3" data-prefix="" data-suffix=" of 5">3 of 5</p>
-            <p class="metric-label">Regional HR partners adopted the dashboard for monthly reviews</p>
+          <article
+            class="metric-card metric-jump"
+            data-project-link="asean-automation"
+            role="link"
+            tabindex="0"
+            aria-label="Jump to ASEAN Workforce Analytics Automation project"
+          >
+            <p class="metric-number" data-target="1" data-prefix="" data-suffix="-page">1-page</p>
+            <p class="metric-label">Leadership dashboard replacing multi-slide monthly reporting</p>
           </article>
-          <article class="metric-card">
-            <p class="metric-number" data-target="2" data-prefix="" data-suffix="">2</p>
-            <p class="metric-label">Recruitment dashboards built for fill-rate and time-to-fill tracking</p>
+          <article
+            class="metric-card metric-jump"
+            data-project-link="esg-platform"
+            role="link"
+            tabindex="0"
+            aria-label="Jump to Sustainability Intelligence Platform project"
+          >
+            <p class="metric-number" data-target="3" data-prefix="~" data-suffix=" min">~3 min</p>
+            <p class="metric-label">Per-company ESG extraction time, down from roughly 2 hours</p>
           </article>
-          <article class="metric-card">
+          <article
+            class="metric-card metric-jump"
+            data-project-link="slb-forecasting"
+            role="link"
+            tabindex="0"
+            aria-label="Jump to SLB Demand Forecasting and Planning project"
+          >
+            <p class="metric-number" data-target="75" data-prefix="" data-suffix="%">75%</p>
+            <p class="metric-label">Forecast back-testing accuracy across evaluated models</p>
+          </article>
+          <article
+            class="metric-card metric-jump"
+            data-project-link="slb-forecasting"
+            role="link"
+            tabindex="0"
+            aria-label="Jump to SLB Demand Forecasting and Planning project"
+          >
             <p class="metric-number" data-target="19536" data-prefix="" data-suffix="">19,536</p>
-            <p class="metric-label">Products reorganized into 83 forecast-ready families</p>
-          </article>
-          <article class="metric-card">
-            <p class="metric-number" data-target="16" data-prefix="" data-suffix="+">16+</p>
-            <p class="metric-label">Workshops used to gather regulatory transformation requirements</p>
+            <p class="metric-label">Products classified to support regional demand planning</p>
           </article>
         </div>
       </section>
@@ -667,19 +821,72 @@
         <div class="dialog-stats" id="dialog-stats" hidden></div>
         <ul class="dialog-list" id="dialog-list" hidden></ul>
         <div class="dialog-gallery" id="dialog-gallery" hidden></div>
-        <div class="dialog-grid">
-          <article class="dialog-block">
-            <h4>Challenge</h4>
+        <div class="dialog-tablist" role="tablist" aria-label="Project narrative">
+          <button
+            class="dialog-tab is-active"
+            id="dialog-tab-problem"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="dialog-panel-problem"
+            data-dialog-tab="problem"
+          >
+            Problem
+          </button>
+          <button
+            class="dialog-tab"
+            id="dialog-tab-action"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="dialog-panel-action"
+            data-dialog-tab="action"
+            tabindex="-1"
+          >
+            Action
+          </button>
+          <button
+            class="dialog-tab"
+            id="dialog-tab-result"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="dialog-panel-result"
+            data-dialog-tab="result"
+            tabindex="-1"
+          >
+            Result
+          </button>
+        </div>
+        <div class="dialog-tab-panels">
+          <section
+            class="dialog-tab-panel is-active"
+            id="dialog-panel-problem"
+            role="tabpanel"
+            aria-labelledby="dialog-tab-problem"
+          >
             <p id="dialog-challenge"></p>
-          </article>
-          <article class="dialog-block">
-            <h4>What I Did</h4>
+          </section>
+          <section
+            class="dialog-tab-panel"
+            id="dialog-panel-action"
+            role="tabpanel"
+            aria-labelledby="dialog-tab-action"
+            hidden
+          >
             <p id="dialog-action"></p>
-          </article>
-          <article class="dialog-block">
-            <h4>Impact</h4>
+          </section>
+          <section
+            class="dialog-tab-panel"
+            id="dialog-panel-result"
+            role="tabpanel"
+            aria-labelledby="dialog-tab-result"
+            hidden
+          >
             <p id="dialog-impact"></p>
-          </article>
+          </section>
+        </div>
+        <div class="dialog-grid dialog-grid-support">
           <article class="dialog-block">
             <h4>Tools</h4>
             <p id="dialog-tools"></p>

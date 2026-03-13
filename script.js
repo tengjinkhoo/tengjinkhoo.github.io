@@ -472,6 +472,14 @@ revealItems.forEach((item) => revealObserver.observe(item));
 const impactSection = document.querySelector("#impact");
 const metricNumbers = Array.from(document.querySelectorAll(".metric-number"));
 const highlightNumbers = Array.from(document.querySelectorAll(".highlight-number"));
+const metricJumpElements = Array.from(
+  document.querySelectorAll("[data-project-link], [data-jump-target]")
+);
+const featuredProjectTriggers = Array.from(
+  document.querySelectorAll("[data-project-open]")
+);
+const HIGHLIGHT_COUNTER_DURATION_MS = 3000;
+const METRIC_COUNTER_DURATION_MS = 3000;
 
 const formatMetric = (value, prefix, suffix) => {
   const formattedValue = Number.isFinite(value)
@@ -501,7 +509,9 @@ const animateCounter = (element, durationMs = 1000) => {
 
 if (highlightNumbers.length > 0) {
   window.requestAnimationFrame(() => {
-    highlightNumbers.forEach((metric) => animateCounter(metric, 1100));
+    highlightNumbers.forEach((metric) =>
+      animateCounter(metric, HIGHLIGHT_COUNTER_DURATION_MS)
+    );
   });
 }
 
@@ -512,7 +522,9 @@ if (impactSection) {
         if (!entry.isIntersecting) {
           return;
         }
-        metricNumbers.forEach((metric) => animateCounter(metric));
+        metricNumbers.forEach((metric) =>
+          animateCounter(metric, METRIC_COUNTER_DURATION_MS)
+        );
         observer.unobserve(entry.target);
       });
     },
@@ -531,6 +543,12 @@ const dialogChallenge = document.querySelector("#dialog-challenge");
 const dialogAction = document.querySelector("#dialog-action");
 const dialogImpact = document.querySelector("#dialog-impact");
 const dialogTools = document.querySelector("#dialog-tools");
+const dialogTabButtons = Array.from(document.querySelectorAll(".dialog-tab"));
+const dialogTabPanels = {
+  problem: document.querySelector("#dialog-panel-problem"),
+  action: document.querySelector("#dialog-panel-action"),
+  result: document.querySelector("#dialog-panel-result"),
+};
 const dialogStats = document.querySelector("#dialog-stats");
 const dialogList = document.querySelector("#dialog-list");
 const dialogGallery = document.querySelector("#dialog-gallery");
@@ -538,6 +556,73 @@ const snippetLightbox = document.querySelector("#snippet-lightbox");
 const snippetLightboxImage = document.querySelector("#snippet-lightbox-image");
 const snippetLightboxCaption = document.querySelector("#snippet-lightbox-caption");
 const snippetLightboxClose = document.querySelector("#snippet-lightbox-close");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let jumpHighlightTimeoutId = null;
+let activeJumpTarget = null;
+
+const setActiveDialogTab = (tabName, shouldFocus = false) => {
+  dialogTabButtons.forEach((button) => {
+    const isActive = button.dataset.dialogTab === tabName;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+    button.tabIndex = isActive ? 0 : -1;
+    if (isActive && shouldFocus) {
+      button.focus();
+    }
+  });
+
+  Object.entries(dialogTabPanels).forEach(([panelName, panel]) => {
+    if (!panel) {
+      return;
+    }
+    const isActive = panelName === tabName;
+    panel.classList.toggle("is-active", isActive);
+    panel.hidden = !isActive;
+  });
+};
+
+const jumpToTarget = (selector) => {
+  if (!selector) {
+    return;
+  }
+
+  const target = document.querySelector(selector);
+  if (!target) {
+    return;
+  }
+
+  if (jumpHighlightTimeoutId) {
+    window.clearTimeout(jumpHighlightTimeoutId);
+  }
+  if (activeJumpTarget) {
+    activeJumpTarget.classList.remove("is-targeted");
+  }
+
+  const scrollBehavior = prefersReducedMotion.matches ? "auto" : "smooth";
+  target.scrollIntoView({ behavior: scrollBehavior, block: "center" });
+
+  if (typeof target.focus === "function") {
+    target.focus({ preventScroll: true });
+  }
+
+  void target.offsetWidth;
+  target.classList.add("is-targeted");
+  activeJumpTarget = target;
+  jumpHighlightTimeoutId = window.setTimeout(() => {
+    target.classList.remove("is-targeted");
+    if (activeJumpTarget === target) {
+      activeJumpTarget = null;
+    }
+  }, 3600);
+};
+
+const jumpToProjectCard = (projectId) => {
+  if (!projectId) {
+    return;
+  }
+  jumpToTarget(`.project[data-project="${projectId}"]`);
+};
 
 const resetSnippetLightbox = () => {
   if (!snippetLightboxImage) {
@@ -745,6 +830,7 @@ const openProjectDialog = (projectId) => {
   renderDialogStats(detail.stats);
   renderDialogHighlights(detail.highlights);
   renderDialogGallery(detail.snippets);
+  setActiveDialogTab("problem");
 
   if (typeof projectDialog.showModal === "function") {
     projectDialog.showModal();
@@ -775,6 +861,42 @@ projectTriggerButtons.forEach((button) => {
   });
 });
 
+metricJumpElements.forEach((element) => {
+  const runJump = () => {
+    if (element.dataset.jumpTarget) {
+      jumpToTarget(element.dataset.jumpTarget);
+      return;
+    }
+    if (element.dataset.projectLink) {
+      jumpToProjectCard(element.dataset.projectLink);
+    }
+  };
+
+  element.addEventListener("click", (event) => {
+    if (event.target.closest(".term-tooltip")) {
+      return;
+    }
+    runJump();
+  });
+
+  element.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+    event.preventDefault();
+    runJump();
+  });
+});
+
+featuredProjectTriggers.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!button.dataset.projectOpen) {
+      return;
+    }
+    openProjectDialog(button.dataset.projectOpen);
+  });
+});
+
 if (projectDialogClose) {
   projectDialogClose.addEventListener("click", closeProjectDialog);
 }
@@ -786,6 +908,37 @@ if (projectDialog) {
     }
   });
 }
+
+dialogTabButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    setActiveDialogTab(button.dataset.dialogTab || "problem");
+  });
+
+  button.addEventListener("keydown", (event) => {
+    const navigationKeys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+    if (!navigationKeys.includes(event.key)) {
+      return;
+    }
+    event.preventDefault();
+
+    let nextIndex = index;
+    if (event.key === "ArrowRight") {
+      nextIndex = (index + 1) % dialogTabButtons.length;
+    } else if (event.key === "ArrowLeft") {
+      nextIndex = (index - 1 + dialogTabButtons.length) % dialogTabButtons.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = dialogTabButtons.length - 1;
+    }
+
+    const nextButton = dialogTabButtons[nextIndex];
+    if (!nextButton) {
+      return;
+    }
+    setActiveDialogTab(nextButton.dataset.dialogTab || "problem", true);
+  });
+});
 
 if (snippetLightboxClose) {
   snippetLightboxClose.addEventListener("click", (event) => {
