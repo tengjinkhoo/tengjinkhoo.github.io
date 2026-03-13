@@ -13,7 +13,7 @@ const projectDetails = {
     context: "SUTD x ESGpedia Capstone",
     title: "Sustainability Intelligence Platform",
     summary:
-      "Industry-linked platform to automate ESG extraction, improve data quality, and support benchmarking for Southeast Asia disclosures.",
+      "Built a workflow to turn fragmented ESG disclosures into benchmark-ready data, reducing extraction turnaround and improving validation confidence for Southeast Asia reporting.",
     challenge:
       "Client teams needed a scalable way to handle fragmented ESG disclosures across formats and frameworks, while preserving data quality for benchmarking.",
     action:
@@ -77,26 +77,26 @@ const projectDetails = {
     context: "TUV SUD | People Data Analytics Intern (ASEAN)",
     title: "ASEAN Workforce Analytics Automation",
     summary:
-      "Regional people-analytics transformation across six ASEAN markets, covering KPI alignment, workflow redesign, and leadership reporting automation.",
+      "Regional workforce analytics work across 6 ASEAN countries and 5 divisions, combining dashboard design, recruitment tracking, and ad hoc decision support for leadership.",
     challenge:
-      "Country teams were reporting through fragmented slide-based workflows, creating version-control issues, slower monthly cycles, and inconsistent KPI definitions across markets.",
+      "Country and division teams were reporting through fragmented slide-based workflows, making monthly review cycles slower and making it harder for leadership to compare workforce signals consistently.",
     action:
-      "Worked with regional and country stakeholders to standardize metric definitions, improve source-data structure, and redesign recurring reporting into a one-page Power BI operating view. In parallel, delivered ad-hoc analyses on attrition, recruitment, and workforce movement to support ongoing People Partner discussions.",
+      "Worked with regional stakeholders to standardize metric definitions, improve source-data structure, and build a Power BI dashboard for the Head of HR covering attrition, hiring, and manpower planning. In parallel, created 2 Excel recruitment dashboards for internship and full-time hiring, and completed 30+ ad hoc analytics engagements spanning cost simulations, compensation analysis, insurance reporting, and People Voice Survey synthesis.",
     impact:
-      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and gave leadership a faster way to spot trend shifts without scanning multiple slide decks.",
-    tools: "Power BI, DAX, Excel, Data Structuring, Stakeholder Alignment",
+      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to dashboard adoption by 3 of 5 regional HR partners for monthly reviews with division leadership.",
+    tools: "Power BI, DAX, Excel, Workforce Analytics, Data Structuring, Stakeholder Alignment",
     stats: [
-      { label: "Scope", value: "6 ASEAN markets" },
-      { label: "Role", value: "People analytics intern" },
-      { label: "Output", value: "One-page summary dashboard + ad-hoc analyses" },
-      { label: "Benefit", value: "Hours to minutes" },
+      { label: "Scope", value: "6 countries, 5 divisions" },
+      { label: "Dashboards built", value: "1 Power BI + 2 Excel" },
+      { label: "Monthly adoption", value: "3 of 5 regional HR partners" },
+      { label: "Ad hoc analyses", value: "30+ engagements" },
     ],
     highlights: [
-      "Aligned teams on shared KPI and calculation logic so country comparisons were more reliable.",
-      "Consolidated multi-slide reporting into a compact one-page summary for faster leadership review.",
-      "Built and maintained refreshable reporting flows tied to HR operations update cycles.",
-      "Supported recurring and ad-hoc workforce analyses beyond attrition, including joiner/leaver movement patterns.",
-      "Translated data outputs into practical discussion points for regional People Business Partners.",
+      "Built a Head of HR dashboard covering attrition, hiring, and manpower planning across 6 countries and 5 divisions.",
+      "Cut recurring reporting time from hours to minutes and saw the dashboard adopted by 3 of 5 regional HR partners for monthly reviews.",
+      "Created 2 Excel recruitment dashboards to track fill rates, time-to-fill, and hiring progress for internship and full-time roles.",
+      "Completed 30+ ad hoc analytics engagements across HR and Finance, including cost simulations, compensation analysis, and insurance reporting.",
+      "Synthesized ASEAN People Voice Survey findings into practical discussion points for senior leadership talent and retention conversations.",
     ],
     snippets: [
       {
@@ -353,7 +353,7 @@ const projectDetails = {
     context: "SLB | Lead Data Analyst",
     title: "SLB Demand Forecasting & Planning",
     summary:
-      "4-month client project to move demand planning from experience-based estimation to data-driven forecasting.",
+      "Replaced estimation-led planning with a validated forecasting workflow and dashboard visibility for finished goods and components.",
     challenge:
       "SLB Singapore needed a more reliable way to forecast demand for finished goods and components under volatile market conditions and long lead times.",
     action:
@@ -473,7 +473,12 @@ const impactSection = document.querySelector("#impact");
 const metricNumbers = Array.from(document.querySelectorAll(".metric-number"));
 const highlightNumbers = Array.from(document.querySelectorAll(".highlight-number"));
 
-const formatMetric = (value, prefix, suffix) => `${prefix}${value}${suffix}`;
+const formatMetric = (value, prefix, suffix) => {
+  const formattedValue = Number.isFinite(value)
+    ? value.toLocaleString("en-US")
+    : String(value);
+  return `${prefix}${formattedValue}${suffix}`;
+};
 
 const animateCounter = (element, durationMs = 1000) => {
   const target = Number(element.dataset.target || 0);
@@ -828,23 +833,6 @@ projectCards.forEach((card) => {
       return;
     }
     openProjectDialog(card.dataset.project);
-  });
-
-  card.addEventListener("mousemove", (event) => {
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      return;
-    }
-    const rect = card.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    const rotateX = -y * 4;
-    const rotateY = x * 4;
-    card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(
-      2
-    )}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px)`;
-  });
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "";
   });
 });
 

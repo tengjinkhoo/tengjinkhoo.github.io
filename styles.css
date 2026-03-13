@@ -558,13 +558,13 @@ button:focus-visible,
 }
 
 .project:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 46px rgba(60, 33, 17, 0.16);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 36px rgba(60, 33, 17, 0.14);
   border-color: rgba(189, 117, 66, 0.45);
 }
 
 .project:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .project-trigger {
@@ -655,7 +655,7 @@ button:focus-visible,
 
 .project:hover .project-visual::before,
 .project:focus-visible .project-visual::before {
-  transform: translateY(-3px);
+  transform: translateY(-1px);
   opacity: 0.78;
 }
 
