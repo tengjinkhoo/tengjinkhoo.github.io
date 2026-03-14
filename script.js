@@ -444,7 +444,7 @@ const updateActiveSection = () => {
     return;
   }
 
-  const threshold = window.scrollY + anchorOffset + 8;
+  const threshold = window.scrollY + anchorOffset;
   const activeSection = sections.reduce((currentHref, section) => {
     if (section.offsetTop <= threshold) {
       return `#${section.id}`;
