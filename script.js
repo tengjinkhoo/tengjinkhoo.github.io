@@ -521,7 +521,7 @@ const revealObserver = new IntersectionObserver(
       observer.unobserve(entry.target);
     });
   },
-  { threshold: 0.18 }
+  { threshold: 0.04, rootMargin: "0px 0px -8% 0px" }
 );
 
 revealItems.forEach((item) => revealObserver.observe(item));
