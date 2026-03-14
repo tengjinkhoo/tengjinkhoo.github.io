@@ -1910,6 +1910,12 @@ button:focus-visible,
 }
 
 @media (max-width: 920px) {
+  .js .reveal,
+  .js .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     padding-top: 1.35rem;
