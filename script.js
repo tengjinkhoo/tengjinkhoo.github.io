@@ -197,7 +197,7 @@ const projectDetails = {
     ],
   },
   "who-am-i-keepsake": {
-    context: "SUTD x Assisi Hospice | Human-Centered Design Project",
+    context: "Assisi Hospice | Human-Centered Design Project",
     title: "Who Am I Physical Card Game",
     summary:
       "4-month school project centered on designing a physical card game that helps caregivers and families start meaningful palliative-care conversations.",
