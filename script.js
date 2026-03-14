@@ -7,6 +7,7 @@ const sections = navLinks
 const projectDialog = document.querySelector("#project-dialog");
 const projectDialogClose = document.querySelector(".dialog-close");
 const scrollProgressBar = document.querySelector("#scroll-progress-bar");
+const backToTopButton = document.querySelector("#back-to-top");
 
 const projectDetails = {
   "esg-platform": {
@@ -57,13 +58,6 @@ const projectDetails = {
           "Compared extracted metrics against ESGpedia references and traced discrepancies to source scope, methodology, or extraction issues.",
       },
       {
-        src: "assets/projects/esg-platform/esg_extraction_performance_trend.png",
-        alt: "Report chart showing F1 score improvement across extraction iterations",
-        title: "Extraction Performance Trend",
-        insight:
-          "Interim report trend indicates iterative gains in extraction quality while maintaining scalable processing performance.",
-      },
-      {
         src: "assets/projects/esg-platform/esg_dashboard_visualisation.png",
         alt: "Dashboard visualisation tool slide showing company benchmarking interface",
         title: "Team Dashboard for Benchmarking Decisions",
@@ -83,37 +77,35 @@ const projectDetails = {
     action:
       "Worked with regional stakeholders to standardize metric definitions, improve source-data structure, and build a Power BI dashboard for the Head of HR covering attrition, hiring, and manpower planning. In parallel, created 2 Excel recruitment dashboards for internship and full-time hiring, and completed 30+ ad hoc analytics engagements spanning cost simulations, compensation analysis, insurance reporting, and People Voice Survey synthesis.",
     impact:
-      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to dashboard adoption by 3 of 5 regional HR partners for monthly reviews with division leadership.",
+      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to ongoing use by 3 of 5 HR business partners in their monthly review workflows.",
     tools: "Power BI, DAX, Excel, Workforce Analytics, Data Structuring, Stakeholder Alignment",
     stats: [
       { label: "Scope", value: "6 countries, 5 divisions" },
       { label: "Dashboards built", value: "1 Power BI + 2 Excel" },
-      { label: "Monthly adoption", value: "3 of 5 regional HR partners" },
+      { label: "Adopted and used by", value: "3 of 5 HR business partners" },
       { label: "Ad hoc analyses", value: "30+ engagements" },
     ],
     highlights: [
       "Built a Head of HR dashboard covering attrition, hiring, and manpower planning across 6 countries and 5 divisions.",
-      "Cut recurring reporting time from hours to minutes and saw the dashboard adopted by 3 of 5 regional HR partners for monthly reviews.",
+      "Cut recurring reporting time from hours to minutes and saw the dashboard picked up by 3 of 5 HR business partners for their monthly review cycles.",
       "Created 2 Excel recruitment dashboards to track fill rates, time-to-fill, and hiring progress for internship and full-time roles.",
       "Completed 30+ ad hoc analytics engagements across HR and Finance, including cost simulations, compensation analysis, and insurance reporting.",
       "Synthesized ASEAN People Voice Survey findings into practical discussion points for senior leadership talent and retention conversations.",
     ],
     snippets: [
       {
-        src: "assets/projects/tuv-sud/tuv-attrition-onepager-public-synthetic-final.png",
-        alt: "Public-safe one-page ASEAN attrition dashboard with countries, divisions, age groups, and key insights",
-        title: "One-Page Leadership Summary (Public-safe sample)",
+        src: "assets/projects/tuv-sud/tuv-attrition-onepager-public-safe.svg",
+        alt: "One-page ASEAN attrition dashboard with countries, divisions, age groups, and key insights",
+        title: "One-Page Leadership Summary",
         insight:
-          "Illustrates the reporting design shift from multiple disconnected slides into one compact decision-support page. Displayed values are synthetic and non-confidential.",
-        layout: "wide",
+          "Illustrates the reporting shift from multiple disconnected slides into one compact decision-support page.",
       },
       {
-        src: "assets/projects/tuv-sud/tuv-attrition-summary-public-synthetic.png",
-        alt: "Public-safe ASEAN attrition summary with yearly trends and category split",
-        title: "Trend + Category View (Public-safe sample)",
+        src: "assets/projects/tuv-sud/tuv-recruitment-dashboard-public-safe.svg",
+        alt: "Internship recruitment tracker showing roles, hiring periods, filled positions, and completion bars",
+        title: "Recruitment Tracker",
         insight:
-          "Shows the standardized trend view and category breakdown used to support country and division-level conversations. Displayed values are synthetic and non-confidential.",
-        layout: "wide",
+          "A simplified Excel tracker used to monitor internship demand, filled roles, and completion progress across hiring periods.",
       },
     ],
   },
@@ -375,7 +367,7 @@ const projectDetails = {
     ],
     snippets: [
       {
-        src: "assets/projects/slb/slb_visual_models_final.png",
+        src: "assets/projects/slb/models_only.png",
         alt: "SLB model comparison matrix covering Linear Regression, Holt-Winters, and Gaussian Process Regression",
         title: "Technique Selection Matrix",
         insight:
@@ -384,7 +376,7 @@ const projectDetails = {
           "Technique Selection Matrix: Holt-Winters delivered the most reliable forecast behavior across tested product families.",
       },
       {
-        src: "assets/projects/slb/slb_visual_dashboard_final3.png",
+        src: "assets/projects/slb/Dashboard_only.png",
         alt: "Full SLB forecasting dashboard with filters, family-level test chart, and future consumption breakdown",
         title: "Forecasting Dashboard (Full View)",
         insight:
@@ -408,19 +400,87 @@ const projectDetails = {
 
 document.body.classList.add("js");
 
-const updateScrollProgress = () => {
-  if (!scrollProgressBar) {
+const setActiveNavLink = (targetHref) => {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === targetHref);
+  });
+};
+
+const getAnchorOffset = () => {
+  const rawOffset = getComputedStyle(document.documentElement).getPropertyValue("--anchor-offset");
+  const parsedOffset = Number.parseFloat(rawOffset);
+  return Number.isFinite(parsedOffset) ? parsedOffset : 60;
+};
+
+let pendingNavTarget = null;
+let pendingNavTimer = null;
+
+const updateActiveSection = () => {
+  if (sections.length === 0) {
     return;
   }
-  const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollHeight <= 0 ? 0 : (scrollTop / scrollHeight) * 100;
-  scrollProgressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+
+  const anchorOffset = getAnchorOffset();
+
+  if (pendingNavTarget) {
+    const pendingSection = document.querySelector(pendingNavTarget);
+    const pendingTop = pendingSection?.getBoundingClientRect().top ?? null;
+
+    if (
+      pendingSection &&
+      pendingTop !== null &&
+      Math.abs(pendingTop - anchorOffset) <= 18
+    ) {
+      setActiveNavLink(pendingNavTarget);
+      pendingNavTarget = null;
+      if (pendingNavTimer) {
+        window.clearTimeout(pendingNavTimer);
+        pendingNavTimer = null;
+      }
+      return;
+    }
+
+    setActiveNavLink(pendingNavTarget);
+    return;
+  }
+
+  const threshold = window.scrollY + anchorOffset + 8;
+  const activeSection = sections.reduce((currentHref, section) => {
+    if (section.offsetTop <= threshold) {
+      return `#${section.id}`;
+    }
+    return currentHref;
+  }, null);
+
+  setActiveNavLink(activeSection);
+};
+
+const updateScrollProgress = () => {
+  if (scrollProgressBar) {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollHeight <= 0 ? 0 : (scrollTop / scrollHeight) * 100;
+    scrollProgressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+  }
+
+  if (!backToTopButton) {
+    return;
+  }
+
+  const revealThreshold = Math.max(window.innerHeight * 0.7, 520);
+  backToTopButton.classList.toggle("is-visible", window.scrollY > revealThreshold);
 };
 
 updateScrollProgress();
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
 window.addEventListener("resize", updateScrollProgress);
+window.addEventListener("resize", () => {
+  if (projectDialog?.open) {
+    syncDialogPanelHeight();
+  }
+});
+window.addEventListener("scroll", updateActiveSection, { passive: true });
+window.addEventListener("resize", updateActiveSection);
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener("click", () => {
@@ -430,28 +490,25 @@ if (menuToggle && siteNav) {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
+      const targetHref = link.getAttribute("href");
+      if (targetHref?.startsWith("#")) {
+        pendingNavTarget = targetHref;
+        if (pendingNavTimer) {
+          window.clearTimeout(pendingNavTimer);
+        }
+        pendingNavTimer = window.setTimeout(() => {
+          pendingNavTarget = null;
+          pendingNavTimer = null;
+          updateActiveSection();
+        }, 900);
+        setActiveNavLink(targetHref);
+      }
       siteNav.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
     });
   });
 }
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-      const targetId = `#${entry.target.id}`;
-      navLinks.forEach((link) => {
-        link.classList.toggle("active", link.getAttribute("href") === targetId);
-      });
-    });
-  },
-  { rootMargin: "-35% 0px -50% 0px", threshold: 0.1 }
-);
-
-sections.forEach((section) => sectionObserver.observe(section));
+updateActiveSection();
 
 const revealItems = document.querySelectorAll(".reveal");
 const revealObserver = new IntersectionObserver(
@@ -469,7 +526,7 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
-const impactSection = document.querySelector("#impact");
+const impactSection = document.querySelector("#results");
 const metricNumbers = Array.from(document.querySelectorAll(".metric-number"));
 const highlightNumbers = Array.from(document.querySelectorAll(".highlight-number"));
 const metricJumpElements = Array.from(
@@ -544,14 +601,18 @@ const dialogAction = document.querySelector("#dialog-action");
 const dialogImpact = document.querySelector("#dialog-impact");
 const dialogTools = document.querySelector("#dialog-tools");
 const dialogTabButtons = Array.from(document.querySelectorAll(".dialog-tab"));
+const dialogTabPanelsContainer = document.querySelector(".dialog-tab-panels");
 const dialogTabPanels = {
   problem: document.querySelector("#dialog-panel-problem"),
   action: document.querySelector("#dialog-panel-action"),
   result: document.querySelector("#dialog-panel-result"),
 };
 const dialogStats = document.querySelector("#dialog-stats");
+const dialogDetails = document.querySelector("#dialog-details");
 const dialogList = document.querySelector("#dialog-list");
-const dialogGallery = document.querySelector("#dialog-gallery");
+const dialogMediaLayout = document.querySelector("#dialog-media-layout");
+const dialogMediaStage = document.querySelector("#dialog-media-stage");
+const dialogMediaThumbs = document.querySelector("#dialog-media-thumbs");
 const snippetLightbox = document.querySelector("#snippet-lightbox");
 const snippetLightboxImage = document.querySelector("#snippet-lightbox-image");
 const snippetLightboxCaption = document.querySelector("#snippet-lightbox-caption");
@@ -560,6 +621,47 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 let jumpHighlightTimeoutId = null;
 let activeJumpTarget = null;
+let activeDialogSnippets = [];
+let activeDialogSnippetIndex = 0;
+
+const syncDialogPanelHeight = () => {
+  if (!dialogTabPanelsContainer) {
+    return;
+  }
+
+  const panels = Object.values(dialogTabPanels).filter(Boolean);
+  if (panels.length === 0) {
+    dialogTabPanelsContainer.style.minHeight = "";
+    return;
+  }
+
+  let maxHeight = 0;
+
+  panels.forEach((panel) => {
+    const wasHidden = panel.hidden;
+    const previousPosition = panel.style.position;
+    const previousVisibility = panel.style.visibility;
+    const previousDisplay = panel.style.display;
+
+    if (wasHidden) {
+      panel.hidden = false;
+      panel.style.position = "absolute";
+      panel.style.visibility = "hidden";
+      panel.style.display = "block";
+    }
+
+    maxHeight = Math.max(maxHeight, panel.scrollHeight);
+
+    if (wasHidden) {
+      panel.hidden = true;
+      panel.style.position = previousPosition;
+      panel.style.visibility = previousVisibility;
+      panel.style.display = previousDisplay;
+    }
+  });
+
+  dialogTabPanelsContainer.style.minHeight = `${Math.max(maxHeight, 220)}px`;
+};
 
 const setActiveDialogTab = (tabName, shouldFocus = false) => {
   dialogTabButtons.forEach((button) => {
@@ -702,7 +804,10 @@ const renderDialogHighlights = (highlights) => {
   }
   dialogList.innerHTML = "";
   if (!Array.isArray(highlights) || highlights.length === 0) {
-    dialogList.hidden = true;
+    if (dialogDetails) {
+      dialogDetails.hidden = true;
+      dialogDetails.open = false;
+    }
     return;
   }
 
@@ -715,103 +820,188 @@ const renderDialogHighlights = (highlights) => {
     dialogList.appendChild(item);
   });
 
-  dialogList.hidden = dialogList.childElementCount === 0;
+  if (dialogDetails) {
+    dialogDetails.hidden = dialogList.childElementCount === 0;
+    dialogDetails.open = false;
+  }
 };
 
-const renderDialogGallery = (snippets) => {
-  if (!dialogGallery) {
+const renderDialogTools = (tools) => {
+  if (!dialogTools) {
     return;
   }
-  dialogGallery.innerHTML = "";
-  if (!Array.isArray(snippets) || snippets.length === 0) {
-    dialogGallery.hidden = true;
+  dialogTools.innerHTML = "";
+
+  const toolItems = String(tools || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  if (toolItems.length === 0) {
     return;
   }
 
-  snippets.forEach((snippet) => {
-    if (!snippet?.src) {
-      return;
+  toolItems.forEach((tool) => {
+    const chip = document.createElement("span");
+    chip.className = "dialog-tool-chip";
+    chip.textContent = tool;
+    dialogTools.appendChild(chip);
+  });
+};
+
+const createDialogMediaFigure = (snippet) => {
+  const figure = document.createElement("figure");
+  figure.className = "dialog-media";
+
+  const isEmbed = snippet.type === "embed";
+  const isVideo = snippet.type === "video";
+
+  if (isEmbed) {
+    figure.classList.add("has-embed");
+    const iframe = document.createElement("iframe");
+    iframe.src = snippet.src;
+    iframe.loading = "lazy";
+    iframe.setAttribute(
+      "title",
+      snippet.alt || snippet.title || "Embedded project media"
+    );
+    iframe.setAttribute(
+      "allow",
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    );
+    iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+    iframe.allowFullscreen = true;
+    figure.appendChild(iframe);
+  } else if (isVideo) {
+    figure.classList.add("has-video");
+    const video = document.createElement("video");
+    video.src = snippet.src;
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    if (snippet.poster) {
+      video.poster = snippet.poster;
     }
+    video.setAttribute(
+      "aria-label",
+      snippet.alt || snippet.title || "Project demo video"
+    );
+    figure.appendChild(video);
+  } else {
+    const link = document.createElement("button");
+    link.className = "dialog-media-link";
+    link.type = "button";
+    link.setAttribute(
+      "aria-label",
+      snippet.title
+        ? `Expand ${snippet.title}`
+        : snippet.alt || "Expand project snippet"
+    );
+    link.addEventListener("click", () => openSnippetLightbox(snippet));
 
-    const figure = document.createElement("figure");
-    figure.className = "dialog-media";
-    if (snippet.layout === "wide") {
-      figure.classList.add("is-wide");
+    const image = document.createElement("img");
+    image.src = snippet.src;
+    image.alt = snippet.alt || "Project snippet";
+    image.loading = "lazy";
+
+    link.appendChild(image);
+    figure.appendChild(link);
+  }
+
+  if (snippet.title || snippet.insight || snippet.caption) {
+    const caption = document.createElement("figcaption");
+    if (snippet.title) {
+      const title = document.createElement("p");
+      title.className = "dialog-media-title";
+      title.textContent = snippet.title;
+      caption.appendChild(title);
     }
+    const note = document.createElement("p");
+    note.className = "dialog-media-note";
+    note.textContent = snippet.insight || snippet.caption || "";
+    caption.appendChild(note);
+    figure.appendChild(caption);
+  }
 
-    const isEmbed = snippet.type === "embed";
-    const isVideo = snippet.type === "video";
-    if (isEmbed) {
-      figure.classList.add("has-embed");
-      const iframe = document.createElement("iframe");
-      iframe.src = snippet.src;
-      iframe.loading = "lazy";
-      iframe.setAttribute(
-        "title",
-        snippet.alt || snippet.title || "Embedded project media"
-      );
-      iframe.setAttribute(
-        "allow",
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      );
-      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-      iframe.allowFullscreen = true;
-      figure.appendChild(iframe);
-    } else if (isVideo) {
-      figure.classList.add("has-video");
-      const video = document.createElement("video");
-      video.src = snippet.src;
-      video.controls = true;
-      video.preload = "metadata";
-      video.playsInline = true;
-      if (snippet.poster) {
-        video.poster = snippet.poster;
-      }
-      video.setAttribute(
-        "aria-label",
-        snippet.alt || snippet.title || "Project demo video"
-      );
-      figure.appendChild(video);
-    } else {
-      const link = document.createElement("button");
-      link.className = "dialog-media-link";
-      link.type = "button";
-      link.setAttribute(
-        "aria-label",
-        snippet.title
-          ? `Expand ${snippet.title}`
-          : snippet.alt || "Expand project snippet"
-      );
-      link.addEventListener("click", () => openSnippetLightbox(snippet));
+  return figure;
+};
 
-      const image = document.createElement("img");
-      image.src = snippet.src;
-      image.alt = snippet.alt || "Project snippet";
-      image.loading = "lazy";
+const renderDialogMediaThumb = (snippet, index) => {
+  const thumb = document.createElement("button");
+  thumb.className = "dialog-media-thumb";
+  if (index === activeDialogSnippetIndex) {
+    thumb.classList.add("is-active");
+  }
+  thumb.type = "button";
+  thumb.setAttribute(
+    "aria-label",
+    snippet.title ? `Show ${snippet.title}` : `Show project media ${index + 1}`
+  );
 
-      link.appendChild(image);
-      figure.appendChild(link);
-    }
+  const previewSrc = snippet.poster || snippet.src;
+  if (snippet.type === "video") {
+    thumb.classList.add("has-video");
+  }
 
-    if (snippet.title || snippet.insight || snippet.caption) {
-      const caption = document.createElement("figcaption");
-      if (snippet.title) {
-        const title = document.createElement("p");
-        title.className = "dialog-media-title";
-        title.textContent = snippet.title;
-        caption.appendChild(title);
-      }
-      const note = document.createElement("p");
-      note.className = "dialog-media-note";
-      note.textContent = snippet.insight || snippet.caption || "";
-      caption.appendChild(note);
-      figure.appendChild(caption);
-    }
+  if (previewSrc) {
+    const image = document.createElement("img");
+    image.src = previewSrc;
+    image.alt = snippet.title || snippet.alt || "Project media thumbnail";
+    image.loading = "lazy";
+    thumb.appendChild(image);
+  }
 
-    dialogGallery.appendChild(figure);
+  if (snippet.type === "video") {
+    const badge = document.createElement("span");
+    badge.className = "dialog-media-thumb-badge";
+    badge.textContent = "Video";
+    thumb.appendChild(badge);
+  }
+
+  thumb.addEventListener("click", () => {
+    activeDialogSnippetIndex = index;
+    renderDialogMediaViewer(activeDialogSnippets);
   });
 
-  dialogGallery.hidden = dialogGallery.childElementCount === 0;
+  return thumb;
+};
+
+const renderDialogMediaViewer = (snippets) => {
+  if (!dialogMediaLayout || !dialogMediaStage || !dialogMediaThumbs) {
+    return;
+  }
+
+  dialogMediaStage.innerHTML = "";
+  dialogMediaThumbs.innerHTML = "";
+
+  if (!Array.isArray(snippets) || snippets.length === 0) {
+    dialogMediaLayout.hidden = true;
+    dialogMediaThumbs.hidden = true;
+    activeDialogSnippets = [];
+    activeDialogSnippetIndex = 0;
+    return;
+  }
+
+  activeDialogSnippets = snippets.filter((snippet) => snippet?.src);
+  if (activeDialogSnippets.length === 0) {
+    dialogMediaLayout.hidden = true;
+    dialogMediaThumbs.hidden = true;
+    return;
+  }
+
+  if (activeDialogSnippetIndex >= activeDialogSnippets.length) {
+    activeDialogSnippetIndex = 0;
+  }
+
+  const activeSnippet = activeDialogSnippets[activeDialogSnippetIndex];
+  dialogMediaStage.appendChild(createDialogMediaFigure(activeSnippet));
+
+  activeDialogSnippets.forEach((snippet, index) => {
+    dialogMediaThumbs.appendChild(renderDialogMediaThumb(snippet, index));
+  });
+
+  dialogMediaLayout.hidden = false;
+  dialogMediaThumbs.hidden = activeDialogSnippets.length <= 1;
 };
 
 const openProjectDialog = (projectId) => {
@@ -826,10 +1016,12 @@ const openProjectDialog = (projectId) => {
   if (dialogChallenge) dialogChallenge.textContent = detail.challenge;
   if (dialogAction) dialogAction.textContent = detail.action;
   if (dialogImpact) dialogImpact.textContent = detail.impact;
-  if (dialogTools) dialogTools.textContent = detail.tools;
+  activeDialogSnippetIndex = 0;
+  renderDialogTools(detail.tools);
   renderDialogStats(detail.stats);
   renderDialogHighlights(detail.highlights);
-  renderDialogGallery(detail.snippets);
+  renderDialogMediaViewer(detail.snippets);
+  syncDialogPanelHeight();
   setActiveDialogTab("problem");
 
   if (typeof projectDialog.showModal === "function") {
@@ -1013,4 +1205,19 @@ if (copyButtons.length > 0 && copyStatus) {
 const yearElement = document.querySelector("#year");
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
+}
+
+if (backToTopButton) {
+  backToTopButton.addEventListener("click", () => {
+    pendingNavTarget = null;
+    if (pendingNavTimer) {
+      window.clearTimeout(pendingNavTimer);
+      pendingNavTimer = null;
+    }
+    setActiveNavLink(null);
+    if (window.location.hash && typeof window.history.replaceState === "function") {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
