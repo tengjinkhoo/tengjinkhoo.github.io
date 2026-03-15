@@ -75,20 +75,20 @@ const projectDetails = {
     challenge:
       "Country and division teams were reporting through fragmented slide-based workflows, making monthly review cycles slower and making it harder for leadership to compare workforce signals consistently.",
     action:
-      "Worked with regional stakeholders to standardize metric definitions, improve source-data structure, and build a Power BI dashboard for the Head of HR covering attrition, hiring, and manpower planning. In parallel, created 2 Excel recruitment dashboards for internship and full-time hiring, and completed 30+ analytics requests spanning cost simulations, compensation analysis, insurance reporting, and People Voice Survey synthesis.",
+      "Worked with regional stakeholders to standardize metric definitions, improve source-data structure, and build a Power BI dashboard for the Head of HR covering attrition, hiring, and manpower planning. In parallel, created 2 Advanced Excel recruitment dashboards for internship and full-time hiring, and completed 30+ analytics requests spanning cost simulations, compensation analysis, insurance reporting, and People Voice Survey synthesis.",
     impact:
       "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to ongoing use by 3 of 5 HR business partners in their monthly review workflows.",
-    tools: "Power BI, DAX, Excel, Workforce Analytics, Data Structuring, Stakeholder Alignment",
+    tools: "Power BI, DAX, Advanced Excel, Workforce Analytics, Data Structuring, Stakeholder Alignment",
     stats: [
       { label: "Scope", value: "6 countries, 5 divisions" },
-      { label: "Dashboards built", value: "1 Power BI + 2 Excel" },
+      { label: "Dashboards built", value: "1 Power BI + 2 Advanced Excel" },
       { label: "Adopted and used by", value: "3 of 5 HR business partners" },
       { label: "Analytics requests", value: "30+ completed" },
     ],
     highlights: [
       "Built a Head of HR dashboard covering attrition, hiring, and manpower planning across 6 countries and 5 divisions.",
       "Cut recurring reporting time from hours to minutes and saw the dashboard picked up by 3 of 5 HR business partners for their monthly review cycles.",
-      "Created 2 Excel recruitment dashboards to track fill rates, time-to-fill, and hiring progress for internship and full-time roles.",
+      "Created 2 Advanced Excel recruitment dashboards to track fill rates, time-to-fill, and hiring progress for internship and full-time roles.",
       "Completed 30+ analytics requests across HR and Finance, including cost simulations, compensation analysis, and insurance reporting.",
       "Synthesized ASEAN People Voice Survey findings into practical discussion points for senior leadership talent and retention conversations.",
     ],
@@ -105,7 +105,7 @@ const projectDetails = {
         alt: "Internship recruitment tracker showing roles, hiring periods, filled positions, and completion bars",
         title: "Recruitment Tracker",
         insight:
-          "A simplified Excel tracker used to monitor internship demand, filled roles, and completion progress across hiring periods.",
+          "A simplified recruitment tracker built in Advanced Excel to monitor internship demand, filled roles, and completion progress across hiring periods.",
       },
     ],
   },
@@ -349,10 +349,10 @@ const projectDetails = {
     challenge:
       "SLB Singapore needed a more reliable way to forecast demand for finished goods and components under volatile market conditions and long lead times.",
     action:
-      "Led data cleaning, product grouping, and model validation using SQL, Python, and Excel; compared Linear Regression, Holt-Winters, and Gaussian Process Regression before implementing Holt-Winters in a Power BI dashboard.",
+      "Led data cleaning, product grouping, and model validation using SQL, Python, and Advanced Excel; compared Linear Regression, Holt-Winters, and Gaussian Process Regression before implementing Holt-Winters in a Power BI dashboard.",
     impact:
       "Enabled forecast-based planning with clearer inventory signals and confidence checks, with about 70%-79% of product families landing within the 95% prediction interval in Jan-Feb 2024 back-tests.",
-    tools: "SQL, Python, Excel, Power BI, R, MATLAB",
+    tools: "SQL, Python, Advanced Excel, Power BI, R, MATLAB",
     stats: [
       { label: "Duration", value: "4 months" },
       { label: "Role", value: "Lead data analyst" },
