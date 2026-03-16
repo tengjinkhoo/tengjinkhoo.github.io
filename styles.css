@@ -3581,6 +3581,95 @@ body {
   min-height: 100%;
 }
 
+.projects-intro {
+  margin: 0 0 1rem;
+  max-width: 60ch;
+  color: var(--muted);
+  text-align: left;
+}
+
+.project-grid {
+  grid-template-columns: 1fr;
+  gap: 1.05rem;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+  grid-template-rows: auto auto auto 1fr auto;
+  align-items: start;
+  column-gap: 1.05rem;
+  row-gap: 0.45rem;
+  min-height: 0;
+  padding: 1.05rem;
+}
+
+.project[data-project="asean-automation"] {
+  --project-accent: var(--mint);
+}
+
+.project[data-project="esg-platform"] {
+  --project-accent: var(--peach);
+}
+
+.project[data-project="slb-forecasting"] {
+  --project-accent: var(--cyan);
+}
+
+.project[data-project="who-am-i-keepsake"] {
+  --project-accent: var(--pink);
+}
+
+.project[data-project="evac-sim"] {
+  --project-accent: var(--violet);
+}
+
+.project[data-project="rainy-retreat"] {
+  --project-accent: #8dc8ff;
+}
+
+.project-visual {
+  grid-column: 1;
+  grid-row: 1 / 6;
+  align-self: stretch;
+  min-height: 100%;
+  margin-bottom: 0;
+  aspect-ratio: auto;
+}
+
+.project > h3,
+.project > .meta,
+.project > .project-kpis,
+.project > p:not(.meta),
+.project > .project-trigger {
+  grid-column: 2;
+}
+
+.project > h3 {
+  margin-bottom: 0;
+  font-size: 1.22rem;
+}
+
+.project > .meta {
+  margin: 0;
+}
+
+.project > .project-trigger {
+  margin-top: 0.35rem;
+}
+
+.project:nth-child(even) .project-visual {
+  grid-column: 2;
+}
+
+.project:nth-child(even) > h3,
+.project:nth-child(even) > .meta,
+.project:nth-child(even) > .project-kpis,
+.project:nth-child(even) > p:not(.meta),
+.project:nth-child(even) > .project-trigger {
+  grid-column: 1;
+}
+
 .document-mobile-note {
   display: none;
   margin: 0 0 0.85rem;
@@ -3594,6 +3683,33 @@ body {
 }
 
 @media (max-width: 920px) {
+  .project {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 0.5rem;
+  }
+
+  .project > h3,
+  .project > .meta,
+  .project > .project-kpis,
+  .project > p:not(.meta),
+  .project > .project-trigger,
+  .project:nth-child(even) > h3,
+  .project:nth-child(even) > .meta,
+  .project:nth-child(even) > .project-kpis,
+  .project:nth-child(even) > p:not(.meta),
+  .project:nth-child(even) > .project-trigger,
+  .project-visual,
+  .project:nth-child(even) .project-visual {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project-visual {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+
   .document-browser {
     grid-template-columns: 1fr;
   }

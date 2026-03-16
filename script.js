@@ -78,17 +78,17 @@ const projectDetails = {
     action:
       "Worked with regional stakeholders to standardize metric definitions, improve source-data structure, and build a Power BI dashboard for the Head of HR covering attrition, hiring, and manpower planning. In parallel, created 2 Advanced Excel recruitment dashboards for internship and full-time hiring, and completed 30+ analytics requests spanning cost simulations, compensation analysis, insurance reporting, and People Voice Survey synthesis.",
     impact:
-      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to ongoing use by 3 of 5 HR business partners in their monthly review workflows.",
+      "Reduced recurring reporting effort from hours to minutes, improved comparability across countries and divisions, and led to ongoing use by 4 of 5 HR business partners in their monthly review workflows.",
     tools: "Power BI, DAX, Advanced Excel, Workforce Analytics, Data Structuring, Stakeholder Alignment",
     stats: [
       { label: "Scope", value: "6 countries, 5 divisions" },
       { label: "Dashboards built", value: "1 Power BI + 2 Advanced Excel" },
-      { label: "Adopted and used by", value: "3 of 5 HR business partners" },
+      { label: "Adopted and used by", value: "4 of 5 HR business partners" },
       { label: "Analytics requests", value: "30+ completed" },
     ],
     highlights: [
       "Built a Head of HR dashboard covering attrition, hiring, and manpower planning across 6 countries and 5 divisions.",
-      "Cut recurring reporting time from hours to minutes and saw the dashboard picked up by 3 of 5 HR business partners for their monthly review cycles.",
+      "Cut recurring reporting time from hours to minutes and saw the dashboard picked up by 4 of 5 HR business partners for their monthly review cycles.",
       "Created 2 Advanced Excel recruitment dashboards to track fill rates, time-to-fill, and hiring progress for internship and full-time roles.",
       "Completed 30+ analytics requests across HR and Finance, including cost simulations, compensation analysis, and insurance reporting.",
       "Synthesized ASEAN People Voice Survey findings into practical discussion points for senior leadership talent and retention conversations.",
@@ -413,41 +413,15 @@ const getAnchorOffset = () => {
   return Number.isFinite(parsedOffset) ? parsedOffset : 60;
 };
 
-let pendingNavTarget = null;
-let pendingNavTimer = null;
-
 const updateActiveSection = () => {
   if (sections.length === 0) {
     return;
   }
 
   const anchorOffset = getAnchorOffset();
-
-  if (pendingNavTarget) {
-    const pendingSection = document.querySelector(pendingNavTarget);
-    const pendingTop = pendingSection?.getBoundingClientRect().top ?? null;
-
-    if (
-      pendingSection &&
-      pendingTop !== null &&
-      Math.abs(pendingTop - anchorOffset) <= 18
-    ) {
-      setActiveNavLink(pendingNavTarget);
-      pendingNavTarget = null;
-      if (pendingNavTimer) {
-        window.clearTimeout(pendingNavTimer);
-        pendingNavTimer = null;
-      }
-      return;
-    }
-
-    setActiveNavLink(pendingNavTarget);
-    return;
-  }
-
-  const threshold = window.scrollY + anchorOffset;
   const activeSection = sections.reduce((currentHref, section) => {
-    if (section.offsetTop <= threshold) {
+    const sectionTop = section.getBoundingClientRect().top;
+    if (sectionTop <= anchorOffset) {
       return `#${section.id}`;
     }
     return currentHref;
@@ -492,21 +466,9 @@ if (menuToggle && siteNav) {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      const targetHref = link.getAttribute("href");
-      if (targetHref?.startsWith("#")) {
-        pendingNavTarget = targetHref;
-        if (pendingNavTimer) {
-          window.clearTimeout(pendingNavTimer);
-        }
-        pendingNavTimer = window.setTimeout(() => {
-          pendingNavTarget = null;
-          pendingNavTimer = null;
-          updateActiveSection();
-        }, 900);
-        setActiveNavLink(targetHref);
-      }
       siteNav.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
+      window.requestAnimationFrame(updateActiveSection);
     });
   });
 }
@@ -1363,11 +1325,6 @@ if (yearElement) {
 
 if (backToTopButton) {
   backToTopButton.addEventListener("click", () => {
-    pendingNavTarget = null;
-    if (pendingNavTimer) {
-      window.clearTimeout(pendingNavTimer);
-      pendingNavTimer = null;
-    }
     setActiveNavLink(null);
     if (window.location.hash && typeof window.history.replaceState === "function") {
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
