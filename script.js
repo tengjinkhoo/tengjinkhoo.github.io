@@ -8,6 +8,7 @@ const projectDialog = document.querySelector("#project-dialog");
 const projectDialogClose = document.querySelector(".dialog-close");
 const scrollProgressBar = document.querySelector("#scroll-progress-bar");
 const backToTopButton = document.querySelector("#back-to-top");
+const returnToLanding = document.querySelector("#return-to-landing");
 
 const projectDetails = {
   "esg-platform": {
@@ -456,8 +457,9 @@ const updateActiveSection = () => {
 };
 
 const updateScrollProgress = () => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+
   if (scrollProgressBar) {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = scrollHeight <= 0 ? 0 : (scrollTop / scrollHeight) * 100;
     scrollProgressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
@@ -511,20 +513,36 @@ if (menuToggle && siteNav) {
 updateActiveSection();
 
 const revealItems = document.querySelectorAll(".reveal");
-const revealObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.04, rootMargin: "0px 0px -8% 0px" }
-);
+const revealInView = () => {
+  revealItems.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top <= window.innerHeight * 0.92 && rect.bottom >= -40) {
+      item.classList.add("visible");
+    }
+  });
+};
 
-revealItems.forEach((item) => revealObserver.observe(item));
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.04, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+  window.requestAnimationFrame(revealInView);
+  window.addEventListener("load", revealInView, { once: true });
+  window.setTimeout(revealInView, 360);
+} else {
+  revealItems.forEach((item) => item.classList.add("visible"));
+}
 
 const impactSection = document.querySelector("#results");
 const metricNumbers = Array.from(document.querySelectorAll(".metric-number"));
@@ -1183,6 +1201,95 @@ projectCards.forEach((card) => {
 
 const copyButtons = Array.from(document.querySelectorAll("[data-copy-text]"));
 const copyStatus = document.querySelector("#copy-status");
+const documentCards = Array.from(
+  document.querySelectorAll(".document-card[data-document-key]")
+);
+const documentTitle = document.querySelector("#document-title");
+const documentSummary = document.querySelector("#document-summary");
+const documentOpenLink = document.querySelector("#document-open-link");
+const documentDownloadLink = document.querySelector("#document-download-link");
+const documentPreviewFrame = document.querySelector("#document-preview-frame");
+
+const documentLibrary = {
+  testimonial: {
+    id: "testimonial-document",
+    title: "TUV SUD testimonial",
+    summary:
+      "Feedback from my most recent internship, focused on ownership, communication, and delivery quality.",
+    href: "assets/testimonials/Teng_Jin_Khoo_Testimonial_20260316.pdf",
+    frameTitle: "Internship testimonial preview",
+  },
+  recommendation: {
+    id: "recommendation-letter",
+    title: "AvePoint recommendation",
+    summary:
+      "A formal recommendation letter covering communication, reliability, and delivery quality.",
+    href: "assets/recommendation/Khoo_Teng_Jin_Recommendation_Letter.pdf",
+    frameTitle: "Recommendation letter preview",
+  },
+  resume: {
+    id: "resume-document",
+    title: "Resume",
+    summary: "A quick preview of my latest resume, ready to open or download directly.",
+    href: "assets/resume/Teng_Jin_Khoo_Resume_20260315.pdf",
+    frameTitle: "Resume preview",
+  },
+};
+
+const renderDocumentViewer = (key) => {
+  const documentEntry = documentLibrary[key];
+  if (
+    !documentEntry ||
+    !documentTitle ||
+    !documentSummary ||
+    !documentOpenLink ||
+    !documentDownloadLink ||
+    !documentPreviewFrame
+  ) {
+    return;
+  }
+
+  documentTitle.textContent = documentEntry.title;
+  documentSummary.textContent = documentEntry.summary;
+  documentOpenLink.href = documentEntry.href;
+  documentDownloadLink.href = documentEntry.href;
+  documentPreviewFrame.src = `${documentEntry.href}#view=FitH`;
+  documentPreviewFrame.title = documentEntry.frameTitle;
+};
+
+const setActiveDocument = (key, shouldUpdateHash = false) => {
+  const documentEntry = documentLibrary[key];
+  if (!documentEntry) {
+    return;
+  }
+
+  documentCards.forEach((card) => {
+    const isActive = card.dataset.documentKey === key;
+    card.classList.toggle("is-active", isActive);
+    card.setAttribute("aria-selected", String(isActive));
+    card.tabIndex = isActive ? 0 : -1;
+  });
+
+  renderDocumentViewer(key);
+
+  if (shouldUpdateHash && typeof window.history.replaceState === "function") {
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}#${documentEntry.id}`
+    );
+  }
+};
+
+const getDocumentKeyFromHash = () => {
+  const hash = window.location.hash.replace("#", "");
+  if (!hash) {
+    return null;
+  }
+
+  const matchedCard = documentCards.find((card) => card.id === hash);
+  return matchedCard?.dataset.documentKey || null;
+};
 
 if (copyButtons.length > 0 && copyStatus) {
   copyButtons.forEach((button) => {
@@ -1199,6 +1306,43 @@ if (copyButtons.length > 0 && copyStatus) {
         copyStatus.textContent = `Could not copy ${label.toLowerCase()} automatically. ${label}: ${textToCopy}`;
       }
     });
+  });
+}
+
+if (documentCards.length > 0) {
+  const initialDocumentKey = getDocumentKeyFromHash() || documentCards[0]?.dataset.documentKey;
+  if (initialDocumentKey) {
+    setActiveDocument(initialDocumentKey);
+  }
+
+  documentCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const key = card.dataset.documentKey;
+      if (!key) {
+        return;
+      }
+      setActiveDocument(key, true);
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+      event.preventDefault();
+      const key = card.dataset.documentKey;
+      if (!key) {
+        return;
+      }
+      setActiveDocument(key, true);
+    });
+  });
+
+  window.addEventListener("hashchange", () => {
+    const hashDocumentKey = getDocumentKeyFromHash();
+    if (!hashDocumentKey) {
+      return;
+    }
+    setActiveDocument(hashDocumentKey);
   });
 }
 
