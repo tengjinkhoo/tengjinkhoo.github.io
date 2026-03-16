@@ -1257,7 +1257,7 @@ const renderDocumentViewer = (key) => {
   documentPreviewFrame.title = documentEntry.frameTitle;
 };
 
-const setActiveDocument = (key, shouldUpdateHash = false) => {
+const setActiveDocument = (key, shouldUpdateLocation = false) => {
   const documentEntry = documentLibrary[key];
   if (!documentEntry) {
     return;
@@ -1272,16 +1272,25 @@ const setActiveDocument = (key, shouldUpdateHash = false) => {
 
   renderDocumentViewer(key);
 
-  if (shouldUpdateHash && typeof window.history.replaceState === "function") {
+  if (shouldUpdateLocation && typeof window.history.replaceState === "function") {
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("doc", key);
+    nextUrl.hash = "documents";
     window.history.replaceState(
       null,
       "",
-      `${window.location.pathname}${window.location.search}#${documentEntry.id}`
+      `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
     );
   }
 };
 
-const getDocumentKeyFromHash = () => {
+const getDocumentKeyFromLocation = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const searchDocumentKey = searchParams.get("doc");
+  if (searchDocumentKey && documentLibrary[searchDocumentKey]) {
+    return searchDocumentKey;
+  }
+
   const hash = window.location.hash.replace("#", "");
   if (!hash) {
     return null;
@@ -1310,7 +1319,8 @@ if (copyButtons.length > 0 && copyStatus) {
 }
 
 if (documentCards.length > 0) {
-  const initialDocumentKey = getDocumentKeyFromHash() || documentCards[0]?.dataset.documentKey;
+  const initialDocumentKey =
+    getDocumentKeyFromLocation() || documentCards[0]?.dataset.documentKey;
   if (initialDocumentKey) {
     setActiveDocument(initialDocumentKey);
   }
@@ -1338,11 +1348,11 @@ if (documentCards.length > 0) {
   });
 
   window.addEventListener("hashchange", () => {
-    const hashDocumentKey = getDocumentKeyFromHash();
-    if (!hashDocumentKey) {
+    const locationDocumentKey = getDocumentKeyFromLocation();
+    if (!locationDocumentKey) {
       return;
     }
-    setActiveDocument(hashDocumentKey);
+    setActiveDocument(locationDocumentKey);
   });
 }
 

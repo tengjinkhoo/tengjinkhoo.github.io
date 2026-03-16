@@ -497,6 +497,8 @@ body.is-entering .landing-transition-layer::before {
 
   .landing-header {
     padding-top: 0.95rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .landing-hero {
@@ -533,6 +535,16 @@ body.is-entering .landing-transition-layer::before {
 
   .bubble-wide {
     grid-column: auto;
+  }
+
+  .bubble-about,
+  .bubble-projects,
+  .bubble-experience,
+  .bubble-how-work,
+  .bubble-testimonial,
+  .bubble-resume,
+  .bubble-contact {
+    grid-area: auto;
   }
 
   .entry-bubble {
