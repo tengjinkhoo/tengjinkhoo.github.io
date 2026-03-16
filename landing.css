@@ -179,6 +179,206 @@ body.is-entering .landing-header {
   z-index: 1;
 }
 
+.landing-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.ambient-orb,
+.ambient-ring,
+.ambient-beam,
+.ambient-spark {
+  position: absolute;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+.ambient-orb {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 38%),
+    radial-gradient(circle, rgba(103, 215, 255, 0.28), rgba(103, 215, 255, 0) 72%);
+  filter: blur(5px);
+  animation: ambientFloat 17s ease-in-out infinite;
+}
+
+.ambient-ring {
+  border: 1px solid rgba(182, 222, 255, 0.2);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 62%);
+  box-shadow:
+    inset 0 0 0 1px rgba(122, 168, 255, 0.06),
+    0 0 34px rgba(103, 215, 255, 0.08);
+  animation: ringDrift 20s ease-in-out infinite;
+}
+
+.ambient-beam {
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(103, 215, 255, 0),
+    rgba(103, 215, 255, 0.08),
+    rgba(255, 255, 255, 0.1),
+    rgba(159, 133, 255, 0.08),
+    rgba(159, 133, 255, 0)
+  );
+  filter: blur(20px);
+  transform: rotate(-14deg);
+  animation: beamSweep 18s ease-in-out infinite;
+}
+
+.orb-a {
+  top: 8%;
+  left: -2%;
+  width: 280px;
+  height: 280px;
+  animation-delay: 0ms;
+}
+
+.orb-b {
+  top: 14%;
+  right: 3%;
+  width: 230px;
+  height: 230px;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 34%),
+    radial-gradient(circle, rgba(159, 133, 255, 0.26), rgba(159, 133, 255, 0) 70%);
+  animation-duration: 19s;
+  animation-delay: 1400ms;
+}
+
+.orb-c {
+  bottom: 11%;
+  left: 34%;
+  width: 190px;
+  height: 190px;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 34%),
+    radial-gradient(circle, rgba(116, 228, 198, 0.24), rgba(116, 228, 198, 0) 72%);
+  animation-duration: 14s;
+  animation-delay: 3200ms;
+}
+
+.orb-d {
+  right: 12%;
+  bottom: -4%;
+  width: 250px;
+  height: 250px;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 34%),
+    radial-gradient(circle, rgba(255, 139, 200, 0.2), rgba(255, 139, 200, 0) 72%);
+  animation-duration: 21s;
+  animation-delay: 2200ms;
+}
+
+.ring-a {
+  top: 6%;
+  left: 18%;
+  width: 250px;
+  height: 250px;
+  animation-delay: 0ms;
+}
+
+.ring-b {
+  top: 32%;
+  right: 16%;
+  width: 170px;
+  height: 170px;
+  border-color: rgba(182, 155, 255, 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgba(182, 155, 255, 0.06),
+    0 0 34px rgba(159, 133, 255, 0.08);
+  animation-delay: 3000ms;
+  animation-duration: 16s;
+}
+
+.ring-c {
+  bottom: 10%;
+  left: 8%;
+  width: 140px;
+  height: 140px;
+  border-color: rgba(116, 228, 198, 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgba(116, 228, 198, 0.06),
+    0 0 30px rgba(116, 228, 198, 0.08);
+  animation-delay: 5200ms;
+  animation-duration: 18s;
+}
+
+.beam-a {
+  top: 12%;
+  left: -8%;
+  width: 48%;
+  height: 110px;
+  animation-delay: 0ms;
+}
+
+.beam-b {
+  bottom: 8%;
+  right: -6%;
+  width: 46%;
+  height: 120px;
+  background: linear-gradient(
+    90deg,
+    rgba(116, 228, 198, 0),
+    rgba(116, 228, 198, 0.07),
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 139, 200, 0.07),
+    rgba(255, 139, 200, 0)
+  );
+  animation-delay: 5400ms;
+  animation-duration: 20s;
+}
+
+.ambient-spark {
+  width: 11px;
+  height: 11px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(103, 215, 255, 0.18) 58%, rgba(103, 215, 255, 0) 72%);
+  box-shadow:
+    0 0 12px rgba(103, 215, 255, 0.24),
+    0 0 26px rgba(103, 215, 255, 0.12);
+  animation: sparkPulse 7.5s ease-in-out infinite;
+}
+
+.spark-a {
+  top: 12%;
+  left: 28%;
+  animation-delay: 0ms;
+}
+
+.spark-b {
+  top: 24%;
+  right: 22%;
+  animation-delay: 1100ms;
+}
+
+.spark-c {
+  top: 48%;
+  left: 12%;
+  animation-delay: 2200ms;
+}
+
+.spark-d {
+  top: 56%;
+  right: 11%;
+  animation-delay: 3600ms;
+}
+
+.spark-e {
+  bottom: 24%;
+  left: 42%;
+  animation-delay: 4900ms;
+}
+
+.spark-f {
+  bottom: 16%;
+  right: 34%;
+  animation-delay: 6100ms;
+}
+
 .landing-copy {
   display: flex;
   flex-direction: column;
@@ -464,6 +664,78 @@ body.is-entering .landing-transition-layer::before {
   }
 }
 
+@keyframes ambientFloat {
+  0%,
+  100% {
+    opacity: 0.24;
+    transform: translate3d(0, 0, 0) scale(0.96);
+  }
+  35% {
+    opacity: 0.46;
+    transform: translate3d(26px, -22px, 0) scale(1.06);
+  }
+  65% {
+    opacity: 0.28;
+    transform: translate3d(-18px, 18px, 0) scale(0.99);
+  }
+}
+
+@keyframes sparkPulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  18% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  34% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+  52% {
+    opacity: 0.16;
+    transform: scale(1.35);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes ringDrift {
+  0%,
+  100% {
+    opacity: 0.16;
+    transform: translate3d(0, 0, 0) scale(0.96);
+  }
+  40% {
+    opacity: 0.34;
+    transform: translate3d(22px, -14px, 0) scale(1.04);
+  }
+  70% {
+    opacity: 0.18;
+    transform: translate3d(-12px, 16px, 0) scale(1);
+  }
+}
+
+@keyframes beamSweep {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: translate3d(0, 0, 0) rotate(-14deg) scaleX(0.96);
+  }
+  45% {
+    opacity: 0.24;
+    transform: translate3d(28px, -10px, 0) rotate(-14deg) scaleX(1.04);
+  }
+  70% {
+    opacity: 0.12;
+    transform: translate3d(-16px, 12px, 0) rotate(-14deg) scaleX(1);
+  }
+}
+
 @keyframes bubbleRise {
   0% {
     opacity: 0;
@@ -486,6 +758,15 @@ body.is-entering .landing-transition-layer::before {
 
   .landing-copy {
     padding: 0.35rem 0.3rem 0;
+  }
+
+  .orb-b,
+  .orb-d {
+    opacity: 0.12;
+  }
+
+  .beam-b {
+    opacity: 0.12;
   }
 }
 
@@ -527,6 +808,10 @@ body.is-entering .landing-transition-layer::before {
     padding: 0.9rem;
   }
 
+  .landing-ambient {
+    opacity: 0.8;
+  }
+
   .landing-bubble-grid {
     grid-template-columns: 1fr;
     grid-template-areas: none;
@@ -554,6 +839,23 @@ body.is-entering .landing-transition-layer::before {
 
   .transition-bubble {
     animation-duration: calc(var(--duration, 820ms) - 80ms);
+  }
+
+  .orb-a {
+    width: 168px;
+    height: 168px;
+  }
+
+  .beam-a,
+  .orb-b,
+  .orb-d {
+    display: none;
+  }
+
+  .ring-b,
+  .spark-d,
+  .spark-f {
+    display: none;
   }
 }
 
