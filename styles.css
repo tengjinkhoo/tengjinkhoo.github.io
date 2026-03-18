@@ -3577,6 +3577,120 @@ body {
   text-align: left;
 }
 
+/* Landing-style accent color system for portfolio cards */
+.hero-highlights .highlight-tile,
+.metrics-grid .metric-card,
+.document-browser-list .document-card {
+  --panel-accent: rgba(103, 215, 255, 0.72);
+}
+
+.hero-highlights .highlight-tile:nth-child(1),
+.metrics-grid .metric-card:nth-child(1),
+.document-browser-list .document-card:nth-child(1) {
+  --panel-accent: rgba(255, 182, 133, 0.78);
+}
+
+.hero-highlights .highlight-tile:nth-child(2),
+.metrics-grid .metric-card:nth-child(2),
+.document-browser-list .document-card:nth-child(2) {
+  --panel-accent: rgba(103, 215, 255, 0.78);
+}
+
+.hero-highlights .highlight-tile:nth-child(3),
+.metrics-grid .metric-card:nth-child(3),
+.document-browser-list .document-card:nth-child(3) {
+  --panel-accent: rgba(116, 228, 198, 0.76);
+}
+
+.hero-highlights .highlight-tile:nth-child(4),
+.metrics-grid .metric-card:nth-child(4) {
+  --panel-accent: rgba(255, 139, 200, 0.76);
+}
+
+.hero-highlights .highlight-tile,
+.metrics-grid .metric-card,
+.document-browser-list .document-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-highlights .highlight-tile::before,
+.metrics-grid .metric-card::before,
+.document-browser-list .document-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 16% 16%, var(--panel-accent), transparent 28%);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-highlights .highlight-tile::after,
+.metrics-grid .metric-card::after,
+.document-browser-list .document-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), var(--panel-accent));
+  opacity: 0.9;
+}
+
+.hero-highlights .highlight-tile {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.014)),
+    rgba(33, 40, 60, 0.54);
+  border-color: rgba(123, 165, 238, 0.14);
+}
+
+.hero-highlights .highlight-number,
+.metrics-grid .metric-number {
+  color: #eef6ff;
+}
+
+.hero-highlights .highlight-tile:nth-child(1) .highlight-number,
+.metrics-grid .metric-card:nth-child(1) .metric-number,
+.document-browser-list .document-card:nth-child(1) h3 {
+  color: #ffba8b;
+}
+
+.hero-highlights .highlight-tile:nth-child(2) .highlight-number,
+.metrics-grid .metric-card:nth-child(2) .metric-number,
+.document-browser-list .document-card:nth-child(2) h3 {
+  color: #79dcff;
+}
+
+.hero-highlights .highlight-tile:nth-child(3) .highlight-number,
+.metrics-grid .metric-card:nth-child(3) .metric-number,
+.document-browser-list .document-card:nth-child(3) h3 {
+  color: #7de9d1;
+}
+
+.hero-highlights .highlight-tile:nth-child(4) .highlight-number,
+.metrics-grid .metric-card:nth-child(4) .metric-number {
+  color: #ff95cf;
+}
+
+.metrics-grid .metric-card {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.014)),
+    rgba(33, 40, 60, 0.54);
+  border-color: rgba(123, 165, 238, 0.14);
+}
+
+.document-browser-list .document-card {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.014)),
+    rgba(33, 40, 60, 0.54);
+  border-color: rgba(123, 165, 238, 0.14);
+}
+
+.document-browser-list .document-card.is-active::after {
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), var(--panel-accent));
+}
+
 .document-viewer {
   min-height: 100%;
 }

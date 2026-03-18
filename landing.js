@@ -1,8 +1,6 @@
 const landingShell = document.querySelector('.landing-shell');
 const transitionLayer = document.querySelector('.landing-transition-layer');
-const landingLinks = Array.from(
-  document.querySelectorAll('.entry-bubble[href], .landing-btn[href], .landing-skip[href]')
-);
+const landingLinks = Array.from(document.querySelectorAll('.landing-btn[href]'));
 
 let isNavigating = false;
 
